@@ -2,6 +2,7 @@ import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "918468003094";
 
   return (
     <footer className="bg-primary text-primary-foreground relative overflow-hidden" data-testid="footer">
@@ -38,7 +39,7 @@ export default function Footer() {
             <h3 className="font-display text-xl font-bold mb-4">Connect With Us</h3>
             <div className="flex gap-4 mb-4">
               <a
-                href="https://wa.me/919876543210"
+                href={`https://wa.me/${whatsappNumber}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 flex items-center justify-center hover-elevate active-elevate-2 transition-all"

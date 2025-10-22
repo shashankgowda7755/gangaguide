@@ -1,14 +1,16 @@
-import React from "react";
+import { useState } from "react";
 import { useLocation } from "wouter";
 import HeroSlider from "@/components/HeroSlider";
 import FadeInSection from "@/components/FadeInSection";
 import PackageCardFlip from "@/components/PackageCardFlip";
 import DestinationGuideCard from "@/components/DestinationGuideCard";
-import EnhancedTestimonialCarousel from "@/components/EnhancedTestimonialCarousel";
+import VideoTestimonials from "@/components/VideoTestimonials";
+import TextReviews from "@/components/TextReviews";
 import TeamMember from "@/components/TeamMember";
 import BlogCard from "@/components/BlogCard";
 import EnhancedContactForm from "@/components/EnhancedContactForm";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import BookingDialog from "@/components/BookingDialog";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import BottomNav from "@/components/BottomNav";
@@ -37,6 +39,8 @@ import blog3 from "@assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa
 
 export default function Home() {
   const [, setLocation] = useLocation();
+  const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState("");
 
   const heroSlides = [
     {
@@ -146,27 +150,81 @@ export default function Home() {
     },
   ];
 
-  const testimonials = [
+  const videoTestimonials = [
     {
       id: 1,
-      name: "Ananya R.",
-      location: "Mumbai, India",
-      text: "The sunrise boat ride was magical. Our guide made every moment unforgettable with stories that brought Varanasi to life.",
-      rating: 5,
+      platform: "instagram" as const,
+      url: "https://www.instagram.com/p/example1/",
+      embedUrl: "https://www.instagram.com/p/example1/embed",
+      caption: "Best boating experience in Kerala! The family adventure package was perfect for our group.",
+      author: "Rajesh Kumar"
     },
     {
       id: 2,
-      name: "Rohit M.",
-      location: "Delhi, India",
-      text: "GangaGuides helped me explore hidden temples I never would have found alone. Truly authentic local experience.",
-      rating: 5,
+      platform: "youtube" as const,
+      url: "https://www.youtube.com/watch?v=example2",
+      embedUrl: "https://www.youtube.com/embed/example2",
+      caption: "Absolutely magical experience! The sunrise boat tour was breathtaking.",
+      author: "Sarah Johnson"
     },
     {
       id: 3,
-      name: "Sarah K.",
-      location: "London, UK",
-      text: "Spiritual, peaceful, and beautifully organized. A must for first-time visitors to Varanasi. Highly recommended!",
+      platform: "instagram" as const,
+      url: "https://www.instagram.com/p/example3/",
+      embedUrl: "https://www.instagram.com/p/example3/embed",
+      caption: "Heaven of Munroe truly lives up to its name! Outstanding service and unforgettable memories.",
+      author: "Priya Sharma"
+    },
+  ];
+
+  const textReviews = [
+    {
+      id: 1,
+      name: "Sarah Johnson",
+      platform: "google_maps" as const,
+      text: "Absolutely magical experience! The sunrise boat tour was breathtaking. The traditional breakfast on the boat was delicious and the hospitality was outstanding.",
       rating: 5,
+      date: "2 weeks ago"
+    },
+    {
+      id: 2,
+      name: "Rajesh Kumar",
+      platform: "tripadvisor" as const,
+      text: "Best boating experience in Kerala! The family adventure package was perfect for our group. Kids loved the fishing experience and the traditional lunch was amazing.",
+      rating: 5,
+      date: "1 month ago"
+    },
+    {
+      id: 3,
+      name: "Emily Chen",
+      platform: "google" as const,
+      text: "The romantic sunset cruise exceeded all expectations! The candlelight dinner on the boat was incredibly romantic. Perfect for our anniversary celebration.",
+      rating: 5,
+      date: "3 weeks ago"
+    },
+    {
+      id: 4,
+      name: "David Wilson",
+      platform: "tripadvisor" as const,
+      text: "Authentic Kerala experience! The homestay was comfortable and the hosts were incredibly welcoming. The canal boating through the backwaters was serene.",
+      rating: 5,
+      date: "2 months ago"
+    },
+    {
+      id: 5,
+      name: "Priya Sharma",
+      platform: "google_maps" as const,
+      text: "Heaven of Munroe truly lives up to its name! The full-day explorer package was incredible. Every moment was well-planned and the guide was knowledgeable.",
+      rating: 5,
+      date: "1 week ago"
+    },
+    {
+      id: 6,
+      name: "Michael Brown",
+      platform: "tripadvisor" as const,
+      text: "Outstanding service and unforgettable memories! The canal boating through the backwaters was peaceful and the bird watching opportunities were fantastic.",
+      rating: 5,
+      date: "3 months ago"
     },
   ];
 
@@ -217,12 +275,19 @@ export default function Home() {
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleWhatsApp = () => {
-    const message = "Hi, I'm interested in booking a GangaGuides tour. Can you share details?";
-    const phoneNumber = "919876543210";
+  const handleWhatsApp = (packageName?: string) => {
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "918468003094";
+    const message = packageName 
+      ? `Hi, I'm interested in the ${packageName} package. Can you share details?`
+      : "Hi, I'm interested in booking a GangaGuides tour. Can you share details?";
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
+  };
+
+  const handleBookNow = (packageName: string) => {
+    setSelectedPackage(packageName);
+    setBookingDialogOpen(true);
   };
 
   return (
@@ -255,8 +320,8 @@ export default function Home() {
                 key={pkg.id}
                 {...pkg}
                 onViewDetails={() => setLocation(`/package/${pkg.id}`)}
-                onEnquireNow={handleWhatsApp}
-                onBookNow={() => scrollToSection("contact")}
+                onEnquireNow={() => handleWhatsApp(pkg.name)}
+                onBookNow={() => handleBookNow(pkg.name)}
               />
             ))}
           </div>
@@ -330,8 +395,25 @@ export default function Home() {
               </p>
             </div>
           </FadeInSection>
+          
+          {/* Video Testimonials Section */}
           <FadeInSection delay={0.2}>
-            <EnhancedTestimonialCarousel testimonials={testimonials} />
+            <div className="mb-16">
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-center mb-8">
+                Watch Their Experiences
+              </h3>
+              <VideoTestimonials testimonials={videoTestimonials} />
+            </div>
+          </FadeInSection>
+
+          {/* Text Reviews Section */}
+          <FadeInSection delay={0.4}>
+            <div>
+              <h3 className="font-display text-2xl md:text-3xl font-bold text-center mb-8">
+                What They're Saying
+              </h3>
+              <TextReviews reviews={textReviews} />
+            </div>
           </FadeInSection>
         </div>
       </section>
@@ -374,6 +456,11 @@ export default function Home() {
       <Footer />
       <WhatsAppFloat />
       <BottomNav onWhatsAppClick={handleWhatsApp} />
+      <BookingDialog
+        open={bookingDialogOpen}
+        onOpenChange={setBookingDialogOpen}
+        packageName={selectedPackage}
+      />
     </div>
   );
 }
