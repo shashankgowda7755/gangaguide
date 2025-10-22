@@ -6,7 +6,7 @@ import { Clock, MapPin, Sparkles } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 interface PackageCardFlipProps {
-  id: number;
+  id: number | string;
   name: string;
   duration: string;
   shortDescription: string;

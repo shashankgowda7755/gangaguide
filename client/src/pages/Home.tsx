@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
+import { useQuery } from "@tanstack/react-query";
+import type { Destination, BlogPost, Package } from "@shared/schema";
 import HeroSlider from "@/components/HeroSlider";
 import FadeInSection from "@/components/FadeInSection";
 import PackageCardFlip from "@/components/PackageCardFlip";
@@ -41,6 +43,19 @@ export default function Home() {
   const [, setLocation] = useLocation();
   const [bookingDialogOpen, setBookingDialogOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
+
+  // Fetch data from APIs
+  const { data: apiDestinations } = useQuery<Destination[]>({
+    queryKey: ['/api/destinations'],
+  });
+
+  const { data: apiBlogPosts } = useQuery<BlogPost[]>({
+    queryKey: ['/api/blog-posts'],
+  });
+
+  const { data: apiPackages } = useQuery<Package[]>({
+    queryKey: ['/api/packages'],
+  });
 
   const heroSlides = [
     {
@@ -154,10 +169,10 @@ export default function Home() {
     {
       id: 1,
       platform: "instagram" as const,
-      url: "https://www.instagram.com/p/example1/",
-      embedUrl: "https://www.instagram.com/p/example1/embed",
-      caption: "Best boating experience in Kerala! The family adventure package was perfect for our group.",
-      author: "Rajesh Kumar"
+      url: "https://www.instagram.com/gangaguide/p/DPiuY01E1EE/",
+      embedUrl: "https://www.instagram.com/p/DPiuY01E1EE/embed",
+      caption: "Amazing experience with GangaGuides! Highly recommend their tours.",
+      author: "Travel Enthusiast"
     },
     {
       id: 2,
@@ -172,7 +187,7 @@ export default function Home() {
       platform: "instagram" as const,
       url: "https://www.instagram.com/p/example3/",
       embedUrl: "https://www.instagram.com/p/example3/embed",
-      caption: "Heaven of Munroe truly lives up to its name! Outstanding service and unforgettable memories.",
+      caption: "Spiritual journey of a lifetime! The guides were incredibly knowledgeable.",
       author: "Priya Sharma"
     },
   ];
@@ -315,15 +330,23 @@ export default function Home() {
             </div>
           </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {packages.map((pkg) => (
-              <PackageCardFlip
-                key={pkg.id}
-                {...pkg}
-                onViewDetails={() => setLocation(`/package/${pkg.id}`)}
-                onEnquireNow={() => handleWhatsApp(pkg.name)}
-                onBookNow={() => handleBookNow(pkg.name)}
-              />
-            ))}
+            {(apiPackages || packages).map((pkg) => {
+              const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
+              return (
+                <PackageCardFlip
+                  key={pkgId}
+                  id={pkgId}
+                  name={pkg.name}
+                  duration={pkg.duration}
+                  shortDescription={pkg.shortDescription}
+                  highlights={pkg.highlights}
+                  imageUrl={pkg.imageUrl}
+                  onViewDetails={() => setLocation(`/package/${pkgId}`)}
+                  onEnquireNow={() => handleWhatsApp(pkg.name)}
+                  onBookNow={() => handleBookNow(pkg.name)}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
@@ -341,14 +364,22 @@ export default function Home() {
             </div>
           </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {destinations.map((destination, index) => (
-              <FadeInSection key={destination.name} delay={index * 0.1}>
-                <DestinationGuideCard
-                  {...destination}
-                  onClick={() => console.log(`Read guide for ${destination.name}`)}
-                />
-              </FadeInSection>
-            ))}
+            {(apiDestinations || destinations).map((destination, index) => {
+              const destData = 'mainImage' in destination 
+                ? { ...destination, imageUrl: destination.mainImage }
+                : destination;
+              const destId = 'id' in destination && typeof destination.id === 'string' 
+                ? destination.id 
+                : destination.name.toLowerCase();
+              return (
+                <FadeInSection key={destination.name} delay={index * 0.1}>
+                  <DestinationGuideCard
+                    {...destData}
+                    onClick={() => setLocation(`/destination/${destId}`)}
+                  />
+                </FadeInSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -431,13 +462,22 @@ export default function Home() {
             </div>
           </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
-              <BlogCard
-                key={post.title}
-                {...post}
-                onClick={() => console.log(`Read ${post.title}`)}
-              />
-            ))}
+            {(apiBlogPosts || blogPosts).map((post, index) => {
+              const imageUrl = 'mainImage' in post ? post.mainImage : post.imageUrl;
+              const postId = 'id' in post && typeof post.id === 'string' ? post.id : String(index + 1);
+              return (
+                <BlogCard
+                  key={post.title}
+                  title={post.title}
+                  excerpt={post.excerpt}
+                  imageUrl={imageUrl}
+                  category={post.category}
+                  publishedDate={post.publishedDate}
+                  readTime={post.readTime}
+                  onClick={() => setLocation(`/blog/${postId}`)}
+                />
+              );
+            })}
           </div>
         </div>
       </section>
