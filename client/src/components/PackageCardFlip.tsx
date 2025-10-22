@@ -63,10 +63,6 @@ export default function PackageCardFlip({
               <p className="text-muted-foreground leading-relaxed">
                 {shortDescription}
               </p>
-              <div className="flex items-center gap-2 text-sm text-primary font-semibold mt-4">
-                <Sparkles className="w-4 h-4" />
-                <span>Hover to see highlights</span>
-              </div>
             </div>
           </div>
         </Card>

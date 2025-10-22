@@ -283,13 +283,12 @@ export default function Home() {
               </p>
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {destinations.map((destination, index) => (
               <FadeInSection key={destination.name} delay={index * 0.1}>
                 <DestinationGuideCard
                   {...destination}
                   onClick={() => console.log(`Read guide for ${destination.name}`)}
-                  onBookNow={handleWhatsApp}
                 />
               </FadeInSection>
             ))}
@@ -299,14 +298,16 @@ export default function Home() {
 
       <section id="about" className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Meet GangaGuides
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
-              Local insight, authentic experiences, and a passion for sharing the soul of Kashi.
-            </p>
-          </div>
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                Meet GangaGuides
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
+                Local insight, authentic experiences, and a passion for sharing the soul of Kashi.
+              </p>
+            </div>
+          </FadeInSection>
           
           <div className="max-w-4xl mx-auto mb-16">
             <p className="text-center text-lg leading-relaxed text-foreground/90">
@@ -327,28 +328,34 @@ export default function Home() {
 
       <section id="testimonials" className="py-16 md:py-24 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Stories from Our Travelers
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-              Hear from those who experienced Varanasi through our eyes.
-            </p>
-          </div>
-          <EnhancedTestimonialCarousel testimonials={testimonials} />
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                Stories from Our Travelers
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                Hear from those who experienced Varanasi through our eyes.
+              </p>
+            </div>
+          </FadeInSection>
+          <FadeInSection delay={0.2}>
+            <EnhancedTestimonialCarousel testimonials={testimonials} />
+          </FadeInSection>
         </div>
       </section>
 
       <section id="blog" className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              From the Ghats: Stories & Travel Tips
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-              Read about the rituals, hidden gems, and experiences that make Varanasi unforgettable.
-            </p>
-          </div>
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                From the Ghats: Stories & Travel Tips
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                Read about the rituals, hidden gems, and experiences that make Varanasi unforgettable.
+              </p>
+            </div>
+          </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {blogPosts.map((post) => (
               <BlogCard
@@ -363,10 +370,12 @@ export default function Home() {
 
       <section id="contact" className="py-16 md:py-24 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
-          <EnhancedContactForm
-            onSubmit={(data) => console.log("Form submitted:", data)}
-            onWhatsAppClick={handleWhatsApp}
-          />
+          <FadeInSection>
+            <EnhancedContactForm
+              onSubmit={(data) => console.log("Form submitted:", data)}
+              onWhatsAppClick={handleWhatsApp}
+            />
+          </FadeInSection>
         </div>
       </section>
 
