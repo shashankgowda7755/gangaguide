@@ -1,13 +1,17 @@
+import React from "react";
 import HeroSlider from "@/components/HeroSlider";
-import PackageCard from "@/components/PackageCard";
-import DestinationCard from "@/components/DestinationCard";
-import TestimonialCarousel from "@/components/TestimonialCarousel";
+import FadeInSection from "@/components/FadeInSection";
+import PackageCardFlip from "@/components/PackageCardFlip";
+import PackageDetailDialog from "@/components/PackageDetailDialog";
+import DestinationGuideCard from "@/components/DestinationGuideCard";
+import EnhancedTestimonialCarousel from "@/components/EnhancedTestimonialCarousel";
 import TeamMember from "@/components/TeamMember";
 import BlogCard from "@/components/BlogCard";
-import ContactForm from "@/components/ContactForm";
+import EnhancedContactForm from "@/components/EnhancedContactForm";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
+import BottomNav from "@/components/BottomNav";
 
 import heroImage1 from "@assets/generated_images/Calm_Ganga_morning_sunrise_cb8f5772.png";
 import heroImage2 from "@assets/generated_images/Evening_aarti_ceremony_Varanasi_fdd358a3.png";
@@ -32,6 +36,8 @@ import blog2 from "@assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f
 import blog3 from "@assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.png";
 
 export default function Home() {
+  const [selectedPackage, setSelectedPackage] = React.useState<number | null>(null);
+
   const heroSlides = [
     {
       id: 1,
@@ -220,7 +226,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen pb-20">
       <Navigation onBookNowClick={() => scrollToSection("contact")} />
       
       <section id="home">
@@ -233,44 +239,59 @@ export default function Home() {
 
       <section id="packages" className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Our Spiritual Journeys
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-              Choose your perfect tour and let us guide you through the heart of Varanasi and nearby sacred destinations.
-            </p>
-          </div>
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                Our Spiritual Journeys
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                Choose your perfect tour and let us guide you through the heart of Varanasi and nearby sacred destinations.
+              </p>
+            </div>
+          </FadeInSection>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {packages.map((pkg) => (
-              <PackageCard
+              <PackageCardFlip
                 key={pkg.id}
                 {...pkg}
-                onViewDetails={() => console.log(`View details for ${pkg.name}`)}
+                onViewDetails={() => setSelectedPackage(pkg.id)}
                 onEnquireNow={handleWhatsApp}
               />
             ))}
           </div>
+          
+          {selectedPackage !== null && (
+            <PackageDetailDialog
+              open={selectedPackage !== null}
+              onOpenChange={(open) => !open && setSelectedPackage(null)}
+              package={packages[selectedPackage - 1]}
+              onEnquireNow={handleWhatsApp}
+            />
+          )}
         </div>
       </section>
 
       <section id="destinations" className="py-16 md:py-24 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Discover Sacred Destinations
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-              Explore Varanasi, Sarnath, Ayodhya, and other spiritual gems through our curated guides.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {destinations.map((destination) => (
-              <DestinationCard
-                key={destination.name}
-                {...destination}
-                onClick={() => console.log(`Navigate to ${destination.name}`)}
-              />
+          <FadeInSection>
+            <div className="text-center mb-12">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
+                Discover Sacred Destinations
+              </h2>
+              <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
+                Explore Varanasi, Sarnath, Ayodhya, and other spiritual gems through our curated guides.
+              </p>
+            </div>
+          </FadeInSection>
+          <div className="grid grid-cols-1 gap-8">
+            {destinations.map((destination, index) => (
+              <FadeInSection key={destination.name} delay={index * 0.1}>
+                <DestinationGuideCard
+                  {...destination}
+                  onClick={() => console.log(`Read guide for ${destination.name}`)}
+                  onBookNow={handleWhatsApp}
+                />
+              </FadeInSection>
             ))}
           </div>
         </div>
@@ -314,7 +335,7 @@ export default function Home() {
               Hear from those who experienced Varanasi through our eyes.
             </p>
           </div>
-          <TestimonialCarousel testimonials={testimonials} />
+          <EnhancedTestimonialCarousel testimonials={testimonials} />
         </div>
       </section>
 
@@ -342,7 +363,7 @@ export default function Home() {
 
       <section id="contact" className="py-16 md:py-24 px-4 bg-accent/30">
         <div className="max-w-7xl mx-auto">
-          <ContactForm
+          <EnhancedContactForm
             onSubmit={(data) => console.log("Form submitted:", data)}
             onWhatsAppClick={handleWhatsApp}
           />
@@ -351,6 +372,7 @@ export default function Home() {
 
       <Footer />
       <WhatsAppFloat />
+      <BottomNav onWhatsAppClick={handleWhatsApp} />
     </div>
   );
 }
