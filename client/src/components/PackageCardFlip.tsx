@@ -14,6 +14,7 @@ interface PackageCardFlipProps {
   imageUrl: string;
   onViewDetails?: () => void;
   onEnquireNow?: () => void;
+  onBookNow?: () => void;
 }
 
 export default function PackageCardFlip({
@@ -24,6 +25,7 @@ export default function PackageCardFlip({
   imageUrl,
   onViewDetails,
   onEnquireNow,
+  onBookNow,
 }: PackageCardFlipProps) {
   const [isFlipped, setIsFlipped] = useState(false);
 
@@ -60,9 +62,28 @@ export default function PackageCardFlip({
               </div>
             </div>
             <div className="flex-1 p-6 flex flex-col justify-between bg-gradient-to-br from-card to-card/80">
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed mb-6">
                 {shortDescription}
               </p>
+              
+              <div className="flex gap-3">
+                <Button
+                  className="flex-1 bg-primary text-primary-foreground font-semibold"
+                  onClick={onBookNow}
+                  data-testid="button-book-now"
+                >
+                  Book Now
+                </Button>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10"
+                  onClick={onEnquireNow}
+                  data-testid="button-whatsapp-icon"
+                >
+                  <FaWhatsapp className="w-5 h-5" />
+                </Button>
+              </div>
             </div>
           </div>
         </Card>

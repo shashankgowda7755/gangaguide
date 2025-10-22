@@ -1,8 +1,8 @@
 import React from "react";
+import { useLocation } from "wouter";
 import HeroSlider from "@/components/HeroSlider";
 import FadeInSection from "@/components/FadeInSection";
 import PackageCardFlip from "@/components/PackageCardFlip";
-import PackageDetailDialog from "@/components/PackageDetailDialog";
 import DestinationGuideCard from "@/components/DestinationGuideCard";
 import EnhancedTestimonialCarousel from "@/components/EnhancedTestimonialCarousel";
 import TeamMember from "@/components/TeamMember";
@@ -36,7 +36,7 @@ import blog2 from "@assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f
 import blog3 from "@assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.png";
 
 export default function Home() {
-  const [selectedPackage, setSelectedPackage] = React.useState<number | null>(null);
+  const [, setLocation] = useLocation();
 
   const heroSlides = [
     {
@@ -254,20 +254,12 @@ export default function Home() {
               <PackageCardFlip
                 key={pkg.id}
                 {...pkg}
-                onViewDetails={() => setSelectedPackage(pkg.id)}
+                onViewDetails={() => setLocation(`/package/${pkg.id}`)}
                 onEnquireNow={handleWhatsApp}
+                onBookNow={() => scrollToSection("contact")}
               />
             ))}
           </div>
-          
-          {selectedPackage !== null && (
-            <PackageDetailDialog
-              open={selectedPackage !== null}
-              onOpenChange={(open) => !open && setSelectedPackage(null)}
-              package={packages[selectedPackage - 1]}
-              onEnquireNow={handleWhatsApp}
-            />
-          )}
         </div>
       </section>
 
