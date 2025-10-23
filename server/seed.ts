@@ -27,7 +27,8 @@ export async function seedDatabase() {
     // Seed Destinations
     const varanasiDest = await storage.createDestination({
       name: "Varanasi",
-      description: "Walk along the holy Ganga, witness morning aarti, and explore hidden alleys of the eternal city.\n\nVaranasi, also known as Kashi or Benares, is one of the world's oldest continuously inhabited cities. Situated on the banks of the sacred River Ganges, this spiritual capital of India offers an unparalleled blend of ancient traditions, vibrant culture, and profound spirituality.\n\nFrom the mesmerizing Ganga Aarti at Dashashwamedh Ghat to the narrow winding lanes filled with temples, from the famous Kashi Vishwanath Temple to the peaceful morning boat rides, Varanasi is a city that touches the soul of every visitor.",
+      shortDescription: "Walk along the holy Ganga, witness morning aarti, and explore hidden alleys of the eternal city.",
+      description: "Varanasi, also known as Kashi or Benares, is one of the world's oldest continuously inhabited cities. Situated on the banks of the sacred River Ganges, this spiritual capital of India offers an unparalleled blend of ancient traditions, vibrant culture, and profound spirituality.\n\nFrom the mesmerizing Ganga Aarti at Dashashwamedh Ghat to the narrow winding lanes filled with temples, from the famous Kashi Vishwanath Temple to the peaceful morning boat rides, Varanasi is a city that touches the soul of every visitor.",
       mainImage: varanasi,
       image2: null,
       image3: null,
@@ -36,7 +37,8 @@ export async function seedDatabase() {
 
     await storage.createDestination({
       name: "Ayodhya",
-      description: "Dive into the legends of Lord Ram and experience age-old traditions firsthand.\n\nAyodhya, the birthplace of Lord Rama, is one of the most sacred pilgrimage sites in Hinduism. This ancient city, mentioned in the great epic Ramayana, stands as a testament to India's rich spiritual and cultural heritage.\n\nVisit the magnificent Ram Janmabhoomi temple, explore Hanuman Garhi, walk through Kanak Bhawan, and experience the serene Saryu Aarti. Ayodhya offers a journey through time, connecting you with thousands of years of devotion and tradition.",
+      shortDescription: "Dive into the legends of Lord Ram and experience age-old traditions firsthand.",
+      description: "Ayodhya, the birthplace of Lord Rama, is one of the most sacred pilgrimage sites in Hinduism. This ancient city, mentioned in the great epic Ramayana, stands as a testament to India's rich spiritual and cultural heritage.\n\nVisit the magnificent Ram Janmabhoomi temple, explore Hanuman Garhi, walk through Kanak Bhawan, and experience the serene Saryu Aarti. Ayodhya offers a journey through time, connecting you with thousands of years of devotion and tradition.",
       mainImage: ayodhya,
       image2: null,
       image3: null,
@@ -45,7 +47,8 @@ export async function seedDatabase() {
 
     await storage.createDestination({
       name: "Sarnath",
-      description: "Visit the site where Buddha gave his first sermon, enriched with history and tranquility.\n\nSarnath holds immense significance in Buddhist history as the place where Lord Buddha delivered his first sermon after attaining enlightenment. Located just 10 kilometers from Varanasi, this peaceful town offers a stark contrast to the bustling ghats of the holy city.\n\nExplore the magnificent Dhamek Stupa, visit the archaeological museum housing ancient Buddhist artifacts, meditate in the serene Japanese temple, and walk the same ground where Buddha once taught the path to enlightenment.",
+      shortDescription: "Visit the site where Buddha gave his first sermon, enriched with history and tranquility.",
+      description: "Sarnath holds immense significance in Buddhist history as the place where Lord Buddha delivered his first sermon after attaining enlightenment. Located just 10 kilometers from Varanasi, this peaceful town offers a stark contrast to the bustling ghats of the holy city.\n\nExplore the magnificent Dhamek Stupa, visit the archaeological museum housing ancient Buddhist artifacts, meditate in the serene Japanese temple, and walk the same ground where Buddha once taught the path to enlightenment.",
       mainImage: sarnath,
       image2: null,
       image3: null,
@@ -54,7 +57,8 @@ export async function seedDatabase() {
 
     await storage.createDestination({
       name: "Prayagraj",
-      description: "Experience the sacred confluence of three holy rivers at Triveni Sangam.\n\nPrayagraj, formerly known as Allahabad, is renowned as the site of the Triveni Sangam - the confluence of three sacred rivers: Ganga, Yamuna, and the mystical Saraswati. This holy city hosts the world's largest religious gathering, the Kumbh Mela, which attracts millions of pilgrims.\n\nTake a boat ride to the Sangam, visit the historic Allahabad Fort, explore the ancient Akshayavat tree, and experience the spiritual energy that has drawn seekers and saints for millennia.",
+      shortDescription: "Experience the sacred confluence of three holy rivers at Triveni Sangam.",
+      description: "Prayagraj, formerly known as Allahabad, is renowned as the site of the Triveni Sangam - the confluence of three sacred rivers: Ganga, Yamuna, and the mystical Saraswati. This holy city hosts the world's largest religious gathering, the Kumbh Mela, which attracts millions of pilgrims.\n\nTake a boat ride to the Sangam, visit the historic Allahabad Fort, explore the ancient Akshayavat tree, and experience the spiritual energy that has drawn seekers and saints for millennia.",
       mainImage: prayagraj,
       image2: null,
       image3: null,
@@ -101,9 +105,43 @@ export async function seedDatabase() {
       image4: null,
     });
 
-    // Seed Packages
+    // Seed Packages - Popular Events
+    await storage.createPackage({
+      name: "Ramnagar Ramlila Experience",
+      category: "popular_event",
+      duration: "1 Day",
+      shortDescription: "Witness the spectacular month-long Ramlila performances across Ramnagar with traditional staging and authentic cultural immersion.",
+      highlights: [
+        "UNESCO-recognized Ramlila spectacle",
+        "Traditional performances without modern lighting",
+        "Heritage locale experience",
+        "Expert guide narration of the epic",
+      ],
+      imageUrl: package1,
+      detailedDescription: "Kicking off on September 6—coinciding with Anant Chaturdashi—the majestic month-long open-air Ramlila unfolds across Ramnagar. This UNESCO-recognized spectacle brings the Ramcharitmanas to life with traditional performances across heritage locales—no modern lighting or sound, just pure cultural immersion. Experience the epic journey of Lord Rama as it has been performed for generations.",
+      price: 3500,
+    });
+
+    await storage.createPackage({
+      name: "Ganga Mahotsav & Dev Deepawali",
+      category: "popular_event",
+      duration: "3 Days",
+      shortDescription: "Experience vibrant cultural programs during Ganga Mahotsav and the luminous Dev Deepawali with millions of diyas.",
+      highlights: [
+        "Ganga Mahotsav cultural programs",
+        "Dev Deepawali diya illumination",
+        "Kartik Purnima full moon celebrations",
+        "Boat ride during festival of lights",
+      ],
+      imageUrl: package2,
+      detailedDescription: "From November 1 to 4, Ganga Mahotsav lights up the ghats with vibrant cultural programs near Rajghat. Right after, on November 5, Dev Deepawali transforms the riverfront into a luminous wonderland as over a million diyas cast reflections across the Ganges during the full moon night of Kartik Purnima. Witness this spectacular festival of lights that illuminates the sacred city.",
+      price: 8500,
+    });
+
+    // Seed Packages - Touristic
     await storage.createPackage({
       name: "1-Day Kashi Darshan",
+      category: "touristic",
       duration: "1 Day",
       shortDescription: "Experience the essence of Varanasi in a single day with our expertly curated tour through sacred ghats and ancient temples.",
       highlights: [
@@ -119,6 +157,7 @@ export async function seedDatabase() {
 
     await storage.createPackage({
       name: "2-Day Kashi + Sarnath",
+      category: "touristic",
       duration: "2 Days",
       shortDescription: "Combine the spiritual energy of Varanasi with the peaceful Buddhist heritage of Sarnath on this immersive journey.",
       highlights: [
@@ -134,6 +173,7 @@ export async function seedDatabase() {
 
     await storage.createPackage({
       name: "3-Day Ayodhya + Kashi Spiritual Trail",
+      category: "touristic",
       duration: "3 Days",
       shortDescription: "A comprehensive spiritual journey connecting the sacred cities of Ayodhya and Varanasi with expert local guidance.",
       highlights: [
@@ -145,6 +185,39 @@ export async function seedDatabase() {
       imageUrl: package3,
       detailedDescription: "Undertake a transformative three-day pilgrimage that weaves together two of India's most sacred cities. Journey from the birthplace of Lord Rama in Ayodhya to the eternal city of Kashi, experiencing the profound spiritual energy that has drawn seekers for millennia.\n\nThis carefully designed itinerary balances temple visits, cultural experiences, and moments of personal reflection. You'll explore the major sites of both cities, participate in sacred rituals, and gain deep insights into Hindu traditions and philosophy from our knowledgeable local guides.",
       price: 12500,
+    });
+
+    // Seed Packages - Pooja
+    await storage.createPackage({
+      name: "Ganga Aarti Ritual Experience",
+      category: "pooja",
+      duration: "Half Day",
+      shortDescription: "Perform sacred rituals like Ganga Aarti, Rudrabhishek, or special temple offerings with expert priest guidance.",
+      highlights: [
+        "Personal Ganga Aarti ceremony",
+        "Priest-guided ritual performance",
+        "Sacred offering at Dashashwamedh Ghat",
+        "Blessing and prasad distribution",
+      ],
+      imageUrl: package1,
+      detailedDescription: "Experience the profound spiritual significance of Ganga Aarti with a personalized ceremony. Our expert priests will guide you through the sacred rituals, explaining the meaning behind each gesture and mantra. Participate in offering prayers to the holy river and receive blessings for peace, prosperity, and spiritual growth.",
+      price: 1500,
+    });
+
+    await storage.createPackage({
+      name: "Temple Pooja Package",
+      category: "pooja",
+      duration: "1 Day",
+      shortDescription: "Complete temple ritual package including Kashi Vishwanath Darshan and special offerings at major sacred sites.",
+      highlights: [
+        "Kashi Vishwanath special darshan",
+        "Rudrabhishek ceremony",
+        "Sankat Mochan Hanuman Temple pooja",
+        "Multiple temple offerings with priests",
+      ],
+      imageUrl: package3,
+      detailedDescription: "A comprehensive spiritual package designed for devotees seeking blessings from the most sacred temples of Varanasi. Includes special darshan arrangements, personalized pooja ceremonies, and expert priest guidance throughout the day. Perfect for those seeking divine blessings and spiritual merit.",
+      price: 5000,
     });
 
     log("Database seeded successfully with destinations, blog posts, and packages");

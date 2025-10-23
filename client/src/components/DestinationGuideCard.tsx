@@ -5,14 +5,14 @@ import { MapPin, Info, BookOpen } from "lucide-react";
 
 interface DestinationGuideCardProps {
   name: string;
-  description: string;
+  shortDescription: string;
   imageUrl: string;
   onClick?: () => void;
 }
 
 export default function DestinationGuideCard({ 
   name, 
-  description, 
+  shortDescription, 
   imageUrl, 
   onClick
 }: DestinationGuideCardProps) {
@@ -39,7 +39,7 @@ export default function DestinationGuideCard({
       
       <CardContent className="p-6 bg-gradient-to-br from-card to-accent/20 flex-1 flex flex-col justify-between">
         <p className="text-muted-foreground leading-relaxed mb-6">
-          {description}
+          {shortDescription}
         </p>
 
         <Button

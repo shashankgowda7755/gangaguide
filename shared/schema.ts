@@ -12,6 +12,7 @@ export const users = pgTable("users", {
 export const destinations = pgTable("destinations", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
+  shortDescription: text("short_description").notNull(),
   description: text("description").notNull(),
   mainImage: text("main_image").notNull(),
   image2: text("image_2"),
@@ -36,6 +37,7 @@ export const blogPosts = pgTable("blog_posts", {
 export const packages = pgTable("packages", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
+  category: text("category").notNull(),
   duration: text("duration").notNull(),
   shortDescription: text("short_description").notNull(),
   highlights: text("highlights").array().notNull(),

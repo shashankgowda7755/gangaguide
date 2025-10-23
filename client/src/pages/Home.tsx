@@ -145,22 +145,22 @@ export default function Home() {
   const destinations = [
     {
       name: "Varanasi",
-      description: "Walk along the holy Ganga, witness morning aarti, and explore hidden alleys of the eternal city.",
+      shortDescription: "Walk along the holy Ganga, witness morning aarti, and explore hidden alleys of the eternal city.",
       imageUrl: varanasi,
     },
     {
       name: "Ayodhya",
-      description: "Dive into the legends of Lord Ram and experience age-old traditions firsthand.",
+      shortDescription: "Dive into the legends of Lord Ram and experience age-old traditions firsthand.",
       imageUrl: ayodhya,
     },
     {
       name: "Sarnath",
-      description: "Visit the site where Buddha gave his first sermon, enriched with history and tranquility.",
+      shortDescription: "Visit the site where Buddha gave his first sermon, enriched with history and tranquility.",
       imageUrl: sarnath,
     },
     {
       name: "Prayagraj",
-      description: "Experience the sacred confluence of three holy rivers at Triveni Sangam.",
+      shortDescription: "Experience the sacred confluence of three holy rivers at Triveni Sangam.",
       imageUrl: prayagraj,
     },
   ];
@@ -329,25 +329,114 @@ export default function Home() {
               </p>
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(apiPackages || packages).map((pkg) => {
-              const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
-              return (
-                <PackageCardFlip
-                  key={pkgId}
-                  id={pkgId}
-                  name={pkg.name}
-                  duration={pkg.duration}
-                  shortDescription={pkg.shortDescription}
-                  highlights={pkg.highlights}
-                  imageUrl={pkg.imageUrl}
-                  onViewDetails={() => setLocation(`/package/${pkgId}`)}
-                  onEnquireNow={() => handleWhatsApp(pkg.name)}
-                  onBookNow={() => handleBookNow(pkg.name)}
-                />
-              );
-            })}
-          </div>
+
+          {/* Popular Events Section */}
+          {(() => {
+            const popularEvents = (apiPackages || packages).filter(pkg => 
+              ('category' in pkg && pkg.category === 'popular_event')
+            );
+            if (popularEvents.length === 0) return null;
+            return (
+              <div className="mb-16">
+                <FadeInSection>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
+                    Popular Events
+                  </h3>
+                </FadeInSection>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {popularEvents.map((pkg) => {
+                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
+                    return (
+                      <PackageCardFlip
+                        key={pkgId}
+                        id={pkgId}
+                        name={pkg.name}
+                        duration={pkg.duration}
+                        shortDescription={pkg.shortDescription}
+                        highlights={pkg.highlights}
+                        imageUrl={pkg.imageUrl}
+                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
+                        onEnquireNow={() => handleWhatsApp(pkg.name)}
+                        onBookNow={() => handleBookNow(pkg.name)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Touristic Packages Section */}
+          {(() => {
+            const touristicPackages = (apiPackages || packages).filter(pkg => 
+              ('category' in pkg && pkg.category === 'touristic') || !('category' in pkg)
+            );
+            if (touristicPackages.length === 0) return null;
+            return (
+              <div className="mb-16">
+                <FadeInSection>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
+                    Tourist Packages
+                  </h3>
+                </FadeInSection>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {touristicPackages.map((pkg) => {
+                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
+                    return (
+                      <PackageCardFlip
+                        key={pkgId}
+                        id={pkgId}
+                        name={pkg.name}
+                        duration={pkg.duration}
+                        shortDescription={pkg.shortDescription}
+                        highlights={pkg.highlights}
+                        imageUrl={pkg.imageUrl}
+                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
+                        onEnquireNow={() => handleWhatsApp(pkg.name)}
+                        onBookNow={() => handleBookNow(pkg.name)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Pooja Packages Section */}
+          {(() => {
+            const poojaPackages = (apiPackages || packages).filter(pkg => 
+              ('category' in pkg && pkg.category === 'pooja')
+            );
+            if (poojaPackages.length === 0) return null;
+            return (
+              <div>
+                <FadeInSection>
+                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
+                    Pooja Packages
+                  </h3>
+                </FadeInSection>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {poojaPackages.map((pkg) => {
+                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
+                    return (
+                      <PackageCardFlip
+                        key={pkgId}
+                        id={pkgId}
+                        name={pkg.name}
+                        duration={pkg.duration}
+                        shortDescription={pkg.shortDescription}
+                        highlights={pkg.highlights}
+                        imageUrl={pkg.imageUrl}
+                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
+                        onEnquireNow={() => handleWhatsApp(pkg.name)}
+                        onBookNow={() => handleBookNow(pkg.name)}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </section>
 
