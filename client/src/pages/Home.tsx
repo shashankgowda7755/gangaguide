@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import type { Destination, BlogPost, Package } from "@shared/schema";
+import { Button } from "@/components/ui/button";
 import HeroSlider from "@/components/HeroSlider";
 import FadeInSection from "@/components/FadeInSection";
 import PackageCardFlip from "@/components/PackageCardFlip";
@@ -322,121 +323,44 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Our Spiritual Journeys
+                Featured Packages
               </h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                Choose your perfect tour and let us guide you through the heart of Varanasi and nearby sacred destinations.
+                Explore our most popular spiritual journeys and experiences
               </p>
             </div>
           </FadeInSection>
 
-          {/* Popular Events Section */}
-          {(() => {
-            const popularEvents = (apiPackages || packages).filter(pkg => 
-              ('category' in pkg && pkg.category === 'popular_event')
-            );
-            if (popularEvents.length === 0) return null;
-            return (
-              <div className="mb-16">
-                <FadeInSection>
-                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
-                    Popular Events
-                  </h3>
-                </FadeInSection>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {popularEvents.map((pkg) => {
-                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
-                    return (
-                      <PackageCardFlip
-                        key={pkgId}
-                        id={pkgId}
-                        name={pkg.name}
-                        duration={pkg.duration}
-                        shortDescription={pkg.shortDescription}
-                        highlights={pkg.highlights}
-                        imageUrl={pkg.imageUrl}
-                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
-                        onEnquireNow={() => handleWhatsApp(pkg.name)}
-                        onBookNow={() => handleBookNow(pkg.name)}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })()}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {(apiPackages || packages).slice(0, 3).map((pkg) => {
+              const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
+              return (
+                <PackageCardFlip
+                  key={pkgId}
+                  id={pkgId}
+                  name={pkg.name}
+                  duration={pkg.duration}
+                  shortDescription={pkg.shortDescription}
+                  highlights={pkg.highlights}
+                  imageUrl={pkg.imageUrl}
+                  onViewDetails={() => setLocation(`/package/${pkgId}`)}
+                  onEnquireNow={() => handleWhatsApp(pkg.name)}
+                  onBookNow={() => handleBookNow(pkg.name)}
+                />
+              );
+            })}
+          </div>
 
-          {/* Touristic Packages Section */}
-          {(() => {
-            const touristicPackages = (apiPackages || packages).filter(pkg => 
-              ('category' in pkg && pkg.category === 'touristic') || !('category' in pkg)
-            );
-            if (touristicPackages.length === 0) return null;
-            return (
-              <div className="mb-16">
-                <FadeInSection>
-                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
-                    Tourist Packages
-                  </h3>
-                </FadeInSection>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {touristicPackages.map((pkg) => {
-                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
-                    return (
-                      <PackageCardFlip
-                        key={pkgId}
-                        id={pkgId}
-                        name={pkg.name}
-                        duration={pkg.duration}
-                        shortDescription={pkg.shortDescription}
-                        highlights={pkg.highlights}
-                        imageUrl={pkg.imageUrl}
-                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
-                        onEnquireNow={() => handleWhatsApp(pkg.name)}
-                        onBookNow={() => handleBookNow(pkg.name)}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })()}
-
-          {/* Pooja Packages Section */}
-          {(() => {
-            const poojaPackages = (apiPackages || packages).filter(pkg => 
-              ('category' in pkg && pkg.category === 'pooja')
-            );
-            if (poojaPackages.length === 0) return null;
-            return (
-              <div>
-                <FadeInSection>
-                  <h3 className="font-display text-2xl md:text-3xl font-bold mb-6">
-                    Pooja Packages
-                  </h3>
-                </FadeInSection>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {poojaPackages.map((pkg) => {
-                    const pkgId = 'id' in pkg && typeof pkg.id === 'string' ? pkg.id : ('id' in pkg ? pkg.id : 1);
-                    return (
-                      <PackageCardFlip
-                        key={pkgId}
-                        id={pkgId}
-                        name={pkg.name}
-                        duration={pkg.duration}
-                        shortDescription={pkg.shortDescription}
-                        highlights={pkg.highlights}
-                        imageUrl={pkg.imageUrl}
-                        onViewDetails={() => setLocation(`/package/${pkgId}`)}
-                        onEnquireNow={() => handleWhatsApp(pkg.name)}
-                        onBookNow={() => handleBookNow(pkg.name)}
-                      />
-                    );
-                  })}
-                </div>
-              </div>
-            );
-          })()}
+          <div className="text-center">
+            <Button
+              size="lg"
+              onClick={() => setLocation("/packages")}
+              className="bg-primary text-primary-foreground border border-primary-border"
+              data-testid="button-view-all-packages"
+            >
+              View All Packages
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -445,30 +369,40 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Discover Sacred Destinations
+                Sacred Destinations
               </h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                Explore Varanasi, Sarnath, Ayodhya, and other spiritual gems through our curated guides.
+                Explore Varanasi, Sarnath, Ayodhya, and other spiritual gems
               </p>
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {(apiDestinations || destinations).map((destination, index) => {
-              const destData = 'mainImage' in destination 
-                ? { ...destination, imageUrl: destination.mainImage }
-                : destination;
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            {(apiDestinations || destinations).slice(0, 2).map((destination, index) => {
+              const imageUrl = 'mainImage' in destination ? destination.mainImage : destination.imageUrl;
               const destId = 'id' in destination && typeof destination.id === 'string' 
                 ? destination.id 
                 : destination.name.toLowerCase();
               return (
                 <FadeInSection key={destination.name} delay={index * 0.1}>
                   <DestinationGuideCard
-                    {...destData}
+                    name={destination.name}
+                    shortDescription={destination.shortDescription}
+                    imageUrl={imageUrl}
                     onClick={() => setLocation(`/destination/${destId}`)}
                   />
                 </FadeInSection>
               );
             })}
+          </div>
+          <div className="text-center">
+            <Button
+              size="lg"
+              onClick={() => setLocation("/destinations")}
+              className="bg-primary text-primary-foreground border border-primary-border"
+              data-testid="button-view-all-destinations"
+            >
+              View All Destinations
+            </Button>
           </div>
         </div>
       </section>
@@ -478,27 +412,31 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Meet GangaGuides
+                About GangaGuides
               </h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto mb-8">
-                Local insight, authentic experiences, and a passion for sharing the soul of Kashi.
+                Local insight, authentic experiences, and a passion for sharing the soul of Kashi
               </p>
             </div>
           </FadeInSection>
           
-          <div className="max-w-4xl mx-auto mb-16">
+          <div className="max-w-4xl mx-auto mb-8">
             <p className="text-center text-lg leading-relaxed text-foreground/90">
               GangaGuides was born to connect travelers with the living heritage of Varanasi and nearby sacred cities. 
               Our guides are locals who have walked these streets, participated in rituals, and understand the stories 
-              behind every temple, ghat, and festival. We believe in small groups, authentic experiences, and creating 
-              memories that stay with you forever.
+              behind every temple, ghat, and festival.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {teamMembers.map((member) => (
-              <TeamMember key={member.name} {...member} />
-            ))}
+          <div className="text-center">
+            <Button
+              size="lg"
+              onClick={() => setLocation("/about")}
+              className="bg-primary text-primary-foreground border border-primary-border"
+              data-testid="button-learn-more-about"
+            >
+              Learn More About Us
+            </Button>
           </div>
         </div>
       </section>
@@ -543,15 +481,15 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                From the Ghats: Stories & Travel Tips
+                Latest Stories & Travel Tips
               </h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                Read about the rituals, hidden gems, and experiences that make Varanasi unforgettable.
+                Discover the rituals, hidden gems, and experiences that make Varanasi unforgettable
               </p>
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {(apiBlogPosts || blogPosts).map((post, index) => {
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {(apiBlogPosts || blogPosts).slice(0, 3).map((post, index) => {
               const imageUrl = 'mainImage' in post ? post.mainImage : post.imageUrl;
               const postId = 'id' in post && typeof post.id === 'string' ? post.id : String(index + 1);
               return (
@@ -567,6 +505,16 @@ export default function Home() {
                 />
               );
             })}
+          </div>
+          <div className="text-center">
+            <Button
+              size="lg"
+              onClick={() => setLocation("/blog")}
+              className="bg-primary text-primary-foreground border border-primary-border"
+              data-testid="button-view-all-blog"
+            >
+              View All Blog Posts
+            </Button>
           </div>
         </div>
       </section>
