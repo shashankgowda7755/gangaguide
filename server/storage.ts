@@ -1,4 +1,8 @@
 import { 
+  users,
+  destinations,
+  blogPosts,
+  packages,
   type User, 
   type InsertUser,
   type Destination,
@@ -8,7 +12,9 @@ import {
   type Package,
   type InsertPackage
 } from "@shared/schema";
+import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
+import type { NeonDatabase } from 'drizzle-orm/neon-serverless';
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -31,7 +37,110 @@ export interface IStorage {
   updatePackage(id: string, pkg: Partial<InsertPackage>): Promise<Package | undefined>;
 }
 
-export class MemStorage implements IStorage {
+export class DatabaseStorage implements IStorage {
+  private db: NeonDatabase<any>;
+
+  constructor(database: NeonDatabase<any>) {
+    this.db = database;
+  }
+  async getUser(id: string): Promise<User | undefined> {
+    const [user] = await this.db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await this.db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await this.db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async getAllDestinations(): Promise<Destination[]> {
+    return await this.db.select().from(destinations);
+  }
+
+  async getDestination(id: string): Promise<Destination | undefined> {
+    const [destination] = await this.db.select().from(destinations).where(eq(destinations.id, id));
+    return destination || undefined;
+  }
+
+  async createDestination(insertDestination: InsertDestination): Promise<Destination> {
+    const [destination] = await this.db
+      .insert(destinations)
+      .values(insertDestination)
+      .returning();
+    return destination;
+  }
+
+  async updateDestination(id: string, updates: Partial<InsertDestination>): Promise<Destination | undefined> {
+    const [destination] = await this.db
+      .update(destinations)
+      .set(updates)
+      .where(eq(destinations.id, id))
+      .returning();
+    return destination || undefined;
+  }
+
+  async getAllBlogPosts(): Promise<BlogPost[]> {
+    return await this.db.select().from(blogPosts);
+  }
+
+  async getBlogPost(id: string): Promise<BlogPost | undefined> {
+    const [blogPost] = await this.db.select().from(blogPosts).where(eq(blogPosts.id, id));
+    return blogPost || undefined;
+  }
+
+  async createBlogPost(insertBlogPost: InsertBlogPost): Promise<BlogPost> {
+    const [blogPost] = await this.db
+      .insert(blogPosts)
+      .values(insertBlogPost)
+      .returning();
+    return blogPost;
+  }
+
+  async updateBlogPost(id: string, updates: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const [blogPost] = await this.db
+      .update(blogPosts)
+      .set(updates)
+      .where(eq(blogPosts.id, id))
+      .returning();
+    return blogPost || undefined;
+  }
+
+  async getAllPackages(): Promise<Package[]> {
+    return await this.db.select().from(packages);
+  }
+
+  async getPackage(id: string): Promise<Package | undefined> {
+    const [pkg] = await this.db.select().from(packages).where(eq(packages.id, id));
+    return pkg || undefined;
+  }
+
+  async createPackage(insertPackage: InsertPackage): Promise<Package> {
+    const [pkg] = await this.db
+      .insert(packages)
+      .values(insertPackage)
+      .returning();
+    return pkg;
+  }
+
+  async updatePackage(id: string, updates: Partial<InsertPackage>): Promise<Package | undefined> {
+    const [pkg] = await this.db
+      .update(packages)
+      .set(updates)
+      .where(eq(packages.id, id))
+      .returning();
+    return pkg || undefined;
+  }
+}
+
+class MemStorage implements IStorage {
   private users: Map<string, User>;
   private destinations: Map<string, Destination>;
   private blogPosts: Map<string, BlogPost>;
@@ -154,4 +263,14 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+function createStorage(): IStorage {
+  if (process.env.DATABASE_URL) {
+    const { db } = require("./db");
+    return new DatabaseStorage(db);
+  } else {
+    console.warn("DATABASE_URL not found, using in-memory storage. Data will be lost on restart.");
+    return new MemStorage();
+  }
+}
+
+export const storage = createStorage();

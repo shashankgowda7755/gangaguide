@@ -81,7 +81,7 @@ export default function DestinationDetail() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => setLocation("/#contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
 
       <div className="max-w-6xl mx-auto px-4 py-8 md:py-12">
         <Button

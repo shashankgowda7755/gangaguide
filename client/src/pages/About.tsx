@@ -1,3 +1,4 @@
+import { useLocation } from "wouter";
 import Navigation from "@/components/Navigation";
 import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
@@ -9,17 +10,14 @@ import guide1 from "@assets/generated_images/Local_tour_guide_portrait_a60f1ce8.
 import guide2 from "@assets/generated_images/Female_guide_portrait_professional_c50981da.png";
 
 export default function About() {
+  const [, setLocation] = useLocation();
+
   const handleWhatsApp = () => {
     const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "918468003094";
     const message = "Hi, I'm interested in booking a GangaGuides tour. Can you share details?";
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     window.open(whatsappUrl, "_blank");
-  };
-
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
   };
 
   const teamMembers = [
@@ -39,7 +37,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => scrollToSection("contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <section className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
