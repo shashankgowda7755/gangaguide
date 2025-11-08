@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, boolean } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -18,6 +18,8 @@ export const destinations = pgTable("destinations", {
   image2: text("image_2"),
   image3: text("image_3"),
   image4: text("image_4"),
+  region: text("region"),
+  featured: boolean("featured").notNull().default(false),
 });
 
 export const blogPosts = pgTable("blog_posts", {
@@ -32,6 +34,7 @@ export const blogPosts = pgTable("blog_posts", {
   image2: text("image_2"),
   image3: text("image_3"),
   image4: text("image_4"),
+  featured: boolean("featured").notNull().default(false),
 });
 
 export const packages = pgTable("packages", {
@@ -44,6 +47,7 @@ export const packages = pgTable("packages", {
   imageUrl: text("image_url").notNull(),
   detailedDescription: text("detailed_description").notNull(),
   price: integer("price"),
+  featured: boolean("featured").notNull().default(false),
 });
 
 export const insertUserSchema = createInsertSchema(users).omit({
