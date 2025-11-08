@@ -11,10 +11,6 @@
       "dest": "/api/index.ts"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/dist/public/assets/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "/api/index.ts"
     }
