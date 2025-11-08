@@ -33,6 +33,8 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      region: "Varanasi",
+      featured: true,
     });
 
     await storage.createDestination({
@@ -43,6 +45,8 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      region: "Ayodhya",
+      featured: true,
     });
 
     await storage.createDestination({
@@ -53,6 +57,8 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      region: "Varanasi",
+      featured: false,
     });
 
     await storage.createDestination({
@@ -63,6 +69,8 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      region: "Prayagraj",
+      featured: false,
     });
 
     // Seed Blog Posts
@@ -77,6 +85,7 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      featured: true,
     });
 
     await storage.createBlogPost({
@@ -90,6 +99,7 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      featured: true,
     });
 
     await storage.createBlogPost({
@@ -103,6 +113,7 @@ export async function seedDatabase() {
       image2: null,
       image3: null,
       image4: null,
+      featured: false,
     });
 
     // Seed Packages - Popular Events
@@ -120,6 +131,7 @@ export async function seedDatabase() {
       imageUrl: package1,
       detailedDescription: "Kicking off on September 6—coinciding with Anant Chaturdashi—the majestic month-long open-air Ramlila unfolds across Ramnagar. This UNESCO-recognized spectacle brings the Ramcharitmanas to life with traditional performances across heritage locales—no modern lighting or sound, just pure cultural immersion. Experience the epic journey of Lord Rama as it has been performed for generations.",
       price: 3500,
+      featured: true,
     });
 
     await storage.createPackage({
@@ -136,6 +148,7 @@ export async function seedDatabase() {
       imageUrl: package2,
       detailedDescription: "From November 1 to 4, Ganga Mahotsav lights up the ghats with vibrant cultural programs near Rajghat. Right after, on November 5, Dev Deepawali transforms the riverfront into a luminous wonderland as over a million diyas cast reflections across the Ganges during the full moon night of Kartik Purnima. Witness this spectacular festival of lights that illuminates the sacred city.",
       price: 8500,
+      featured: true,
     });
 
     // Seed Packages - Touristic
@@ -153,6 +166,7 @@ export async function seedDatabase() {
       imageUrl: package1,
       detailedDescription: "Immerse yourself in the spiritual essence of Varanasi with this comprehensive one-day journey through the ancient city of Kashi. Experience the magic of sunrise on the Ganges, visit the most sacred temples, explore the winding lanes of the old city, and witness the mesmerizing evening aarti ceremony.\n\nThis carefully curated tour takes you through the most significant spiritual and cultural landmarks of Varanasi, offering insights into the city's rich heritage and living traditions. Our experienced local guides will share stories and legends that bring the ancient city to life.",
       price: 2500,
+      featured: true,
     });
 
     await storage.createPackage({
@@ -169,6 +183,7 @@ export async function seedDatabase() {
       imageUrl: package2,
       detailedDescription: "Embark on a profound two-day spiritual expedition that connects the ancient traditions of Hinduism and Buddhism. This immersive experience combines the sacred ghats and temples of Varanasi with the historic Buddhist sites of Sarnath, offering a unique perspective on India's rich spiritual heritage.\n\nDay 1 covers the essential Varanasi experience, while Day 2 takes you to the serene Buddhist sites of Sarnath. This combination offers a complete spiritual journey through two of India's most significant religious sites.",
       price: 6500,
+      featured: false,
     });
 
     await storage.createPackage({
@@ -185,6 +200,7 @@ export async function seedDatabase() {
       imageUrl: package3,
       detailedDescription: "Undertake a transformative three-day pilgrimage that weaves together two of India's most sacred cities. Journey from the birthplace of Lord Rama in Ayodhya to the eternal city of Kashi, experiencing the profound spiritual energy that has drawn seekers for millennia.\n\nThis carefully designed itinerary balances temple visits, cultural experiences, and moments of personal reflection. You'll explore the major sites of both cities, participate in sacred rituals, and gain deep insights into Hindu traditions and philosophy from our knowledgeable local guides.",
       price: 12500,
+      featured: true,
     });
 
     // Seed Packages - Pooja
@@ -202,6 +218,7 @@ export async function seedDatabase() {
       imageUrl: package1,
       detailedDescription: "Experience the profound spiritual significance of Ganga Aarti with a personalized ceremony. Our expert priests will guide you through the sacred rituals, explaining the meaning behind each gesture and mantra. Participate in offering prayers to the holy river and receive blessings for peace, prosperity, and spiritual growth.",
       price: 1500,
+      featured: true,
     });
 
     await storage.createPackage({
@@ -218,6 +235,7 @@ export async function seedDatabase() {
       imageUrl: package3,
       detailedDescription: "A comprehensive spiritual package designed for devotees seeking blessings from the most sacred temples of Varanasi. Includes special darshan arrangements, personalized pooja ceremonies, and expert priest guidance throughout the day. Perfect for those seeking divine blessings and spiritual merit.",
       price: 5000,
+      featured: true,
     });
 
     log("Database seeded successfully with destinations, blog posts, and packages");

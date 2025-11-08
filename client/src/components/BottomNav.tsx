@@ -1,22 +1,20 @@
 import { Home, Package, Map, BookOpen, Users, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLocation } from "wouter";
 
 interface BottomNavProps {
   onWhatsAppClick?: () => void;
 }
 
 export default function BottomNav({ onWhatsAppClick }: BottomNavProps) {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [, setLocation] = useLocation();
 
   const navItems = [
-    { label: "Home", icon: Home, href: "home" },
-    { label: "Packages", icon: Package, href: "packages" },
-    { label: "Destination", icon: Map, href: "destinations" },
-    { label: "Blog", icon: BookOpen, href: "blog" },
-    { label: "About", icon: Users, href: "about" },
+    { label: "Home", icon: Home, href: "/" },
+    { label: "Packages", icon: Package, href: "/packages" },
+    { label: "Destination", icon: Map, href: "/destinations" },
+    { label: "Blog", icon: BookOpen, href: "/blog" },
+    { label: "About", icon: Users, href: "/about" },
   ];
 
   return (
@@ -31,7 +29,7 @@ export default function BottomNav({ onWhatsAppClick }: BottomNavProps) {
             return (
               <button
                 key={item.href}
-                onClick={() => scrollToSection(item.href)}
+                onClick={() => setLocation(item.href)}
                 className="flex flex-col items-center gap-1 px-3 py-2 rounded-lg hover-elevate active-elevate-2 transition-all group"
                 data-testid={`link-bottom-nav-${item.label.toLowerCase()}`}
               >

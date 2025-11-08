@@ -18,7 +18,8 @@ export default function DestinationGuideCard({
 }: DestinationGuideCardProps) {
   return (
     <Card
-      className="group overflow-hidden hover-elevate transition-all duration-500 border-2 border-card-border hover:border-primary/30 flex flex-col"
+      className="group overflow-hidden hover-elevate transition-all duration-500 border-2 border-card-border hover:border-primary/30 flex flex-col cursor-pointer"
+      onClick={onClick}
       data-testid={`card-destination-${name.toLowerCase()}`}
     >
       <div className="relative h-56 overflow-hidden">
@@ -45,7 +46,10 @@ export default function DestinationGuideCard({
         <Button
           variant="outline"
           className="w-full"
-          onClick={onClick}
+          onClick={(e) => {
+            e.stopPropagation();
+            onClick?.();
+          }}
           data-testid="button-read-guide"
         >
           <BookOpen className="w-4 h-4 mr-2" />

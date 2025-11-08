@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLocation } from "wouter";
 import { useQuery } from "@tanstack/react-query";
 import type { Destination } from "@shared/schema";
@@ -7,9 +8,12 @@ import BottomNav from "@/components/BottomNav";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
 import FadeInSection from "@/components/FadeInSection";
+import { Badge } from "@/components/ui/badge";
+import { Filter } from "lucide-react";
 
 export default function Destinations() {
   const [, setLocation] = useLocation();
+  const [regionFilter, setRegionFilter] = useState<string>("all");
 
   const { data: apiDestinations, isLoading } = useQuery<Destination[]>({
     queryKey: ['/api/destinations'],
@@ -23,12 +27,13 @@ export default function Destinations() {
     window.open(whatsappUrl, "_blank");
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
-
   const destinations = apiDestinations || [];
+
+  const filteredDestinations = destinations.filter(dest =>
+    regionFilter === "all" || dest.region === regionFilter
+  );
+
+  const regions = Array.from(new Set(destinations.map(dest => dest.region).filter(Boolean)));
 
   if (isLoading) {
     return (
@@ -40,7 +45,7 @@ export default function Destinations() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => scrollToSection("contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <section className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
@@ -55,8 +60,35 @@ export default function Destinations() {
             </div>
           </FadeInSection>
 
+          <div className="flex flex-wrap gap-4 mb-12 justify-center">
+            <div className="flex items-center gap-2">
+              <Filter className="w-4 h-4 text-muted-foreground" />
+              <span className="text-sm font-medium">Region:</span>
+            </div>
+            
+            <div className="flex flex-wrap gap-2">
+              <Badge
+                className={`cursor-pointer ${regionFilter === "all" ? "bg-primary" : "bg-muted hover-elevate"}`}
+                onClick={() => setRegionFilter("all")}
+                data-testid="filter-region-all"
+              >
+                All Regions
+              </Badge>
+              {regions.map(region => (
+                <Badge
+                  key={region}
+                  className={`cursor-pointer ${regionFilter === region ? "bg-primary" : "bg-muted hover-elevate"}`}
+                  onClick={() => setRegionFilter(region)}
+                  data-testid={`filter-region-${region?.toLowerCase()}`}
+                >
+                  {region}
+                </Badge>
+              ))}
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {destinations.map((destination, index) => (
+            {filteredDestinations.map((destination, index) => (
               <FadeInSection key={destination.id} delay={index * 0.1}>
                 <DestinationGuideCard
                   name={destination.name}
@@ -67,6 +99,14 @@ export default function Destinations() {
               </FadeInSection>
             ))}
           </div>
+
+          {filteredDestinations.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-lg text-muted-foreground">
+                No destinations found in this region.
+              </p>
+            </div>
+          )}
         </div>
       </section>
 
