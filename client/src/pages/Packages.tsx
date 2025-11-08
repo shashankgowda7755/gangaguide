@@ -39,10 +39,6 @@ export default function Packages() {
     setBookingDialogOpen(true);
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const packages = apiPackages || [];
 
@@ -75,7 +71,7 @@ export default function Packages() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => scrollToSection("contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <section className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">

@@ -27,10 +27,6 @@ export default function Blog() {
     window.open(whatsappUrl, "_blank");
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    element?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const blogPosts = apiBlogPosts || [];
 
@@ -52,7 +48,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => scrollToSection("contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <section className="py-16 md:py-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">

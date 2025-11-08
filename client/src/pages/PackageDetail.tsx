@@ -74,7 +74,7 @@ export default function PackageDetail() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => setLocation("/#contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <div className="relative h-[60vh] md:h-[70vh] overflow-hidden">
         <img

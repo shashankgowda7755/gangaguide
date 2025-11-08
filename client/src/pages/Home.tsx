@@ -308,7 +308,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen pb-20">
-      <Navigation onBookNowClick={() => scrollToSection("contact")} />
+      <Navigation onBookNowClick={() => setLocation("/booking")} />
       
       <section id="home">
         <HeroSlider
