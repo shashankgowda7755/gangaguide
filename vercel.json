@@ -4,15 +4,28 @@
   "installCommand": "npm install",
   "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist/public",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "ignoreCommand": "if [ \"$VERCEL_ENV\" = \"production\" ] || echo \"$VERCEL_GIT_COMMIT_REF\" | grep -q '^preview/'; then exit 1; else exit 0; fi",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index" },
-    { "source": "/((?!api/|assets/|attached_assets/|favicon).*)", "destination": "/index.html" }
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/((?!api/|assets/|attached_assets/|favicon).*)",
+      "destination": "/index.html"
+    }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

@@ -83,11 +83,11 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
-        serif: ["Playfair Display", "serif"],
+        sans: ["Inter Variable", "sans-serif"],
+        serif: ["Playfair Display Variable", "serif"],
         mono: ["var(--font-mono)"],
-        display: ["Playfair Display", "serif"],
-        body: ["Inter", "sans-serif"],
+        display: ["Playfair Display Variable", "serif"],
+        body: ["Inter Variable", "sans-serif"],
         accent: ["Crimson Text", "serif"],
       },
       keyframes: {

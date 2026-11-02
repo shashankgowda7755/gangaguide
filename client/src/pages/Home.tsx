@@ -8,7 +8,6 @@ import FadeInSection from "@/components/FadeInSection";
 import PackageCardFlip from "@/components/PackageCardFlip";
 import DestinationGuideCard from "@/components/DestinationGuideCard";
 import VideoTestimonials from "@/components/VideoTestimonials";
-import TextReviews from "@/components/TextReviews";
 import TeamMember from "@/components/TeamMember";
 import BlogCard from "@/components/BlogCard";
 import EnhancedContactForm from "@/components/EnhancedContactForm";
@@ -166,81 +165,31 @@ export default function Home() {
     },
   ];
 
+  // Real posts from the brand's Instagram (@gangaguide)
   const videoTestimonials = [
     {
       id: 1,
       platform: "instagram" as const,
-      url: "https://www.instagram.com/gangaguide/p/DPiuY01E1EE/",
-      embedUrl: "https://www.instagram.com/p/DPiuY01E1EE/embed",
-      caption: "Amazing experience with GangaGuides! Highly recommend their tours.",
-      author: "Travel Enthusiast"
+      url: "https://www.instagram.com/p/DVWoySYE376/",
+      embedUrl: "https://www.instagram.com/p/DVWoySYE376/embed",
+      caption: "2-day spiritual plan: Kashi darshan and the Vindhyachal Shakti Peeth yatra.",
+      author: "@gangaguide"
     },
     {
       id: 2,
-      platform: "youtube" as const,
-      url: "https://www.youtube.com/watch?v=example2",
-      embedUrl: "https://www.youtube.com/embed/example2",
-      caption: "Absolutely magical experience! The sunrise boat tour was breathtaking.",
-      author: "Sarah Johnson"
+      platform: "instagram" as const,
+      url: "https://www.instagram.com/p/DQE8tF9E-Kp/",
+      embedUrl: "https://www.instagram.com/p/DQE8tF9E-Kp/embed",
+      caption: "Kaal Bhairav bhog aarti darshan in Kashi.",
+      author: "@gangaguide"
     },
     {
       id: 3,
       platform: "instagram" as const,
-      url: "https://www.instagram.com/p/example3/",
-      embedUrl: "https://www.instagram.com/p/example3/embed",
-      caption: "Spiritual journey of a lifetime! The guides were incredibly knowledgeable.",
-      author: "Priya Sharma"
-    },
-  ];
-
-  const textReviews = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      platform: "google_maps" as const,
-      text: "Absolutely magical experience! The sunrise boat tour was breathtaking. The traditional breakfast on the boat was delicious and the hospitality was outstanding.",
-      rating: 5,
-      date: "2 weeks ago"
-    },
-    {
-      id: 2,
-      name: "Rajesh Kumar",
-      platform: "tripadvisor" as const,
-      text: "Best boating experience in Kerala! The family adventure package was perfect for our group. Kids loved the fishing experience and the traditional lunch was amazing.",
-      rating: 5,
-      date: "1 month ago"
-    },
-    {
-      id: 3,
-      name: "Emily Chen",
-      platform: "google" as const,
-      text: "The romantic sunset cruise exceeded all expectations! The candlelight dinner on the boat was incredibly romantic. Perfect for our anniversary celebration.",
-      rating: 5,
-      date: "3 weeks ago"
-    },
-    {
-      id: 4,
-      name: "David Wilson",
-      platform: "tripadvisor" as const,
-      text: "Authentic Kerala experience! The homestay was comfortable and the hosts were incredibly welcoming. The canal boating through the backwaters was serene.",
-      rating: 5,
-      date: "2 months ago"
-    },
-    {
-      id: 5,
-      name: "Priya Sharma",
-      platform: "google_maps" as const,
-      text: "Heaven of Munroe truly lives up to its name! The full-day explorer package was incredible. Every moment was well-planned and the guide was knowledgeable.",
-      rating: 5,
-      date: "1 week ago"
-    },
-    {
-      id: 6,
-      name: "Michael Brown",
-      platform: "tripadvisor" as const,
-      text: "Outstanding service and unforgettable memories! The canal boating through the backwaters was peaceful and the bird watching opportunities were fantastic.",
-      rating: 5,
-      date: "3 months ago"
+      url: "https://www.instagram.com/p/DPiuY01E1EE/",
+      embedUrl: "https://www.instagram.com/p/DPiuY01E1EE/embed",
+      caption: "Moments from the ghats and temples of Varanasi.",
+      author: "@gangaguide"
     },
   ];
 
@@ -446,33 +395,23 @@ export default function Home() {
           <FadeInSection>
             <div className="text-center mb-12">
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-                Stories from Our Travelers
+                From Our Instagram
               </h2>
               <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-                Hear from those who experienced Varanasi through our eyes.
+                Real moments from our trips across Kashi. Follow @gangaguide for more.
               </p>
             </div>
           </FadeInSection>
           
-          {/* Video Testimonials Section */}
           <FadeInSection delay={0.2}>
-            <div className="mb-16">
+            <div>
               <h3 className="font-display text-2xl md:text-3xl font-bold text-center mb-8">
-                Watch Their Experiences
+                Watch on Instagram
               </h3>
               <VideoTestimonials testimonials={videoTestimonials} />
             </div>
           </FadeInSection>
 
-          {/* Text Reviews Section */}
-          <FadeInSection delay={0.4}>
-            <div>
-              <h3 className="font-display text-2xl md:text-3xl font-bold text-center mb-8">
-                What They're Saying
-              </h3>
-              <TextReviews reviews={textReviews} />
-            </div>
-          </FadeInSection>
         </div>
       </section>
 

@@ -1,0 +1,42 @@
+{
+  "/": {
+    "title": "GangaGuides - Authentic Spiritual Tours in Varanasi, Ayodhya & Sarnath | Local Guides",
+    "description": "Local guides for spiritual tours in Varanasi (Kashi), Ayodhya, Sarnath and Prayagraj: Ganga aarti, boat rides, temple darshan and heritage walks. Plan your trip on WhatsApp."
+  },
+  "/packages": {
+    "title": "Tour Packages - Tourist, Pooja & Festival Trips | GangaGuides",
+    "description": "Choose a Varanasi tour package: tourist trips, pooja and ritual packages, and festival events like Dev Deepawali and Ramnagar Ramlila."
+  },
+  "/packages/tourist": {
+    "title": "Tourist Packages in Varanasi, Sarnath & Ayodhya | GangaGuides",
+    "description": "Guided tourist packages across Kashi, Sarnath and Ayodhya: ghats, temples, boat rides and heritage walks with local guides."
+  },
+  "/packages/pooja": {
+    "title": "Pooja Packages - Ganga Aarti, Rudrabhishek & Temple Rituals | GangaGuides",
+    "description": "Book sacred rituals in Varanasi: Ganga aarti, Rudrabhishek and special temple offerings, arranged by local guides."
+  },
+  "/packages/popular-events": {
+    "title": "Festival Trips - Dev Deepawali & Ramnagar Ramlila | GangaGuides",
+    "description": "Experience Varanasi's big festivals: Dev Deepawali on the ghats and the Ramnagar Ramlila, with local guides and planned viewing."
+  },
+  "/destinations": {
+    "title": "Sacred Destinations - Varanasi, Ayodhya, Sarnath, Prayagraj | GangaGuides",
+    "description": "Guides to Varanasi, Ayodhya, Sarnath and Prayagraj: what to see, sacred sites and how to plan your visit with local guides."
+  },
+  "/blog": {
+    "title": "Travel Stories & Tips for Varanasi and Ayodhya | GangaGuides Blog",
+    "description": "Stories and practical tips for spiritual travel in Varanasi, Ayodhya and Sarnath: aarti, hidden temples and trip planning."
+  },
+  "/about": {
+    "title": "About GangaGuides - Local Guides of Kashi",
+    "description": "GangaGuides connects travellers with the living heritage of Varanasi and nearby sacred cities through local guides."
+  },
+  "/booking": {
+    "title": "Plan Your Journey - Book a Varanasi Tour | GangaGuides",
+    "description": "Share your travel dates and plans and get a personalised itinerary for Varanasi, Ayodhya or Sarnath on WhatsApp."
+  },
+  "/privacy": {
+    "title": "Privacy Policy | GangaGuides",
+    "description": "How GangaGuides handles the details you share when you plan a trip with us."
+  }
+}
