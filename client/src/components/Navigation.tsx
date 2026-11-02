@@ -38,15 +38,17 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
               className="flex items-center gap-3 hover-elevate active-elevate-2 px-3 py-2 rounded-lg transition-all group"
               data-testid="button-logo"
             >
-              <div className={`w-10 h-10 flex items-center justify-center rounded-lg bg-primary/10 group-hover:bg-primary/20 transition-colors`}>
-                <svg viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-primary">
-                  <path d="M12 2L4 6v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V6l-8-4z" />
-                </svg>
-              </div>
+              <img
+                src="/logo.png"
+                alt="GangaGuides logo"
+                width={48}
+                height={48}
+                className="w-12 h-12 rounded-full bg-white object-contain shadow-sm"
+              />
               <span className={`font-display text-2xl md:text-3xl font-bold transition-colors ${
                 solid ? "text-foreground" : "text-white"
               }`}>
-                Ganga Gates
+                GangaGuides
               </span>
             </button>
           </Link>
