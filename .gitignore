@@ -8,3 +8,4 @@ data/
 .vercel
 photos/*
 !photos/README.md
+qa-shots/

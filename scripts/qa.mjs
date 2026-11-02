@@ -55,3 +55,6 @@ for (const p of paths) {
 }
 await browser.close();
 writeFileSync(path.join(SHOTS, "qa-report.json"), JSON.stringify(report, null, 2));
+const bad = report.filter((r) => r.axe.length || r.overflow.length || r.console.length || r.h1 !== 1 || r.status !== (r.path === "/this-page-does-not-exist" ? 404 : 200));
+console.log(bad.length ? `QA FAIL on ${bad.length} of ${report.length} routes` : `QA PASS: ${report.length} routes`);
+if (bad.length) process.exitCode = 1;
