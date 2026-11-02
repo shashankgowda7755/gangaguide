@@ -67,6 +67,10 @@ export function TripPage({ slug }: { slug: string }) {
         <Crumbs items={[{ href: "/", label: "Home" }, { href: "/packages", label: "Trips" }, { label: trip.name }]} />
         <h1>{trip.name}</h1>
         <p className="lede">{trip.summary}</p>
+        {/* phones: the price box sits below the itinerary, so repeat the essentials here */}
+        <p className="trip-facts">
+          {trip.duration} · from <strong>{formatPrice(trip.priceFrom)}</strong> · <a href="#enquire">Enquire</a>
+        </p>
       </section>
       <section className="wrap split" style={{ paddingBottom: "var(--space-section)" }}>
         <div>

@@ -176,6 +176,8 @@ a:hover { text-decoration-thickness: 2px; }
 .place-link { color: var(--color-ink); text-decoration: none; display: grid; gap: var(--space-3); }
 .place-link h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-2xl); }
 .place-link:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+.trip-facts { display: none; }
+@media (max-width: 860px) { .trip-facts { display: block; margin-top: var(--space-3); font-size: var(--text-lg); } }
 .place-link .dist { font-size: var(--text-sm); color: var(--color-river); font-weight: 600; }
 /* distance shows above the name but is read after it */
 .place-link .photo { order: -2; }
@@ -285,6 +287,7 @@ a:hover { text-decoration-thickness: 2px; }
 .cookie { display: flex; gap: var(--space-4); align-items: center; }
 .cookie p { margin: 0; }
 .cookie .btn { min-height: 44px; padding-inline: var(--space-4); }
+@media (max-width: 520px) { .cookie { padding: var(--space-3) var(--space-4); font-size: var(--text-xs); } }
 body:has(.cookie) .wa-float, body:has(.cookie) .to-top { visibility: hidden; }
 @media (min-width: 900px) { body:has(.cookie) .wa-float, body:has(.cookie) .to-top { visibility: visible; } }
 

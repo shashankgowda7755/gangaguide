@@ -209,7 +209,7 @@ function Floating() {
       {cookie && (
         <div className="cookie" role="region" aria-label="Cookie notice">
           <p>
-            We use no tracking or advertising cookies. Your browser stores this choice and any enquiry draft locally.{" "}
+            No tracking or advertising cookies. Only this choice and your form draft stay in your browser.{" "}
             <Link href="/cookies">Cookie details</Link>
           </p>
           <button
