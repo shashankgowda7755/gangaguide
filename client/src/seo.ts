@@ -13,6 +13,8 @@ export interface Meta {
   noindex?: boolean;
   jsonld?: object[];
   type?: "website" | "article";
+  /** share card in client/public/og (scripts/og-cards.ts); default card when unset */
+  image?: string;
 }
 
 const abs = (p: string) => (SITE_URL ? SITE_URL + p : p);
@@ -71,6 +73,7 @@ export function metaFor(path: string): Meta {
     return {
       title: t(`${tr.name} (${tr.duration}, from ₹${tr.priceFrom.toLocaleString("en-IN")})`),
       description: tr.summary,
+      image: `/og/trip-${tr.slug}.png`,
       jsonld: [
         {
           "@context": "https://schema.org",
@@ -107,6 +110,7 @@ export function metaFor(path: string): Meta {
     return {
       title: t(`${pl.name}: what to see and when to go`),
       description: pl.summary,
+      image: `/og/place-${pl.slug}.png`,
       jsonld: [
         {
           "@context": "https://schema.org",
@@ -127,6 +131,7 @@ export function metaFor(path: string): Meta {
       title: t(po.title),
       description: po.description,
       type: "article",
+      image: `/og/post-${po.slug}.png`,
       jsonld: [
         {
           "@context": "https://schema.org",
@@ -135,6 +140,7 @@ export function metaFor(path: string): Meta {
           description: po.description,
           datePublished: po.published,
           dateModified: po.updated,
+          ...(SITE_URL && { image: abs(`/og/post-${po.slug}.png`) }),
           author: { "@type": "Organization", name: site.brandName },
           publisher: { "@type": "Organization", name: site.brandName },
         },
@@ -148,8 +154,8 @@ export function metaFor(path: string): Meta {
     "/search": { title: t("Search"), description: "Search trips, destinations, journal posts and questions." },
     "/faq": { title: t("Questions"), description: "Booking, prices, seasons, temple rules and photography at the ghats.", jsonld: [faqLd(faqs)] },
     "/privacy": { title: t("Privacy policy"), description: "What we collect when you enquire, why, how long we keep it and your rights under India's DPDP Act." },
-    "/terms": { title: t("Terms"), description: "Terms for using this website and booking trips." },
-    "/cancellation-policy": { title: t("Cancellation and refunds"), description: "How cancellations, changes and refunds work." },
+    "/terms": { title: t("Terms"), description: "Terms for using this website and for booking trips with us: quotes, confirmation, payment, changes and your responsibilities on the day." },
+    "/cancellation-policy": { title: t("Cancellation and refunds"), description: "How cancellations, date changes and refunds work for day trips, pooja bookings and multi-day trails, and how refunds are paid back." },
     "/cookies": { title: t("Cookies"), description: "The only things this site stores in your browser, and why." },
   };
   return simple[p] ?? notFound;
@@ -187,7 +193,11 @@ export function headHtml(path: string, m: Meta): string {
     `<meta property="og:type" content="${m.type ?? "website"}">`,
     `<meta property="og:site_name" content="${esc(site.brandName)}">`,
     `<meta property="og:locale" content="en_IN">`,
-    `<meta name="twitter:card" content="summary">`,
+    `<meta property="og:image" content="${abs(m.image ?? "/og/default.png")}">`,
+    `<meta property="og:image:width" content="1200">`,
+    `<meta property="og:image:height" content="630">`,
+    `<meta property="og:image:alt" content="${esc(m.title)}">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
   ];
   if (m.noindex) tags.push(`<meta name="robots" content="noindex">`);
   if (SITE_URL && !m.noindex) {

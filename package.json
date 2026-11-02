@@ -13,8 +13,10 @@
     "start": "NODE_ENV=production node --import tsx server/index.ts",
     "preview": "npm run build && npm start",
     "check": "tsc --noEmit",
+    "test": "node --import tsx --test tests/*.test.ts",
     "images": "node scripts/optimize-images.mjs",
-    "qa": "node scripts/qa.mjs"
+    "qa": "node scripts/qa.mjs",
+    "og": "node --import tsx scripts/og-cards.ts"
   },
   "dependencies": {
     "@fontsource/mukta": "^5.2.5",

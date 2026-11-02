@@ -57,7 +57,7 @@ export const places: Place[] = [
     name: "Ayodhya",
     hindi: "अयोध्या",
     fromVaranasi: "About 200 km",
-    summary: "The city of Lord Ram on the banks of the Saryu.",
+    summary: "The city of Lord Ram on the banks of the Saryu: Ram Janmabhoomi temple, Hanuman Garhi, Kanak Bhawan and the evening ghats.",
     body: [
       "Ayodhya is honoured as the birthplace of Lord Ram and is one of the seven sacred cities of Hindu tradition. Its temples and ghats line the Saryu river.",
       "Most visitors come for the Ram Janmabhoomi temple, then visit Hanuman Garhi, Kanak Bhawan and the Saryu ghats in the evening. The nearest large airports are Ayodhya and Lucknow; the city is also well connected by train.",
