@@ -40,9 +40,12 @@ export default function EnhancedContactForm({ onSubmit, onWhatsAppClick }: Enhan
     specialRequests: "",
   });
 
+  // Enquiries go to WhatsApp with the details filled in (nothing is stored on a server)
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "918468003094";
+    const message = `Hi! I'd like to plan a trip with GangaGuides.\n\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nPackage: ${formData.package || "Not sure yet"}\nTravel date: ${formData.travelDate || "Flexible"}\nTravellers: ${formData.numTravelers || "-"}\nRequests: ${formData.specialRequests || "None"}`;
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, "_blank");
     onSubmit?.(formData);
   };
 
@@ -128,7 +131,7 @@ export default function EnhancedContactForm({ onSubmit, onWhatsAppClick }: Enhan
                 Select Package
               </Label>
               <Select value={formData.package} onValueChange={(value) => handleChange("package", value)}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary transition-all" data-testid="select-package">
+                <SelectTrigger className="h-12 border-2 focus:border-primary transition-all" data-testid="select-package" aria-label="Package">
                   <SelectValue placeholder="Choose a tour package" />
                 </SelectTrigger>
                 <SelectContent>
@@ -163,7 +166,7 @@ export default function EnhancedContactForm({ onSubmit, onWhatsAppClick }: Enhan
                 Number of Travelers
               </Label>
               <Select value={formData.numTravelers} onValueChange={(value) => handleChange("numTravelers", value)}>
-                <SelectTrigger className="h-12 border-2 focus:border-primary transition-all" data-testid="select-travelers">
+                <SelectTrigger className="h-12 border-2 focus:border-primary transition-all" data-testid="select-travelers" aria-label="Number of travellers">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -206,13 +209,17 @@ export default function EnhancedContactForm({ onSubmit, onWhatsAppClick }: Enhan
             <Button
               type="button"
               onClick={onWhatsAppClick}
-              className="flex-1 h-14 bg-[#25D366] hover:bg-[#20BD5A] text-white border-none text-lg font-semibold shadow-lg hover:shadow-xl transition-all gap-2"
+              className="flex-1 h-14 bg-[#15803d] hover:bg-[#166534] text-white border-none text-lg font-semibold shadow-lg hover:shadow-xl transition-all gap-2"
               data-testid="button-whatsapp-direct"
             >
               <FaWhatsapp className="w-5 h-5" />
               Chat on WhatsApp
             </Button>
           </div>
+          <p className="text-xs text-muted-foreground text-center">
+            Submitting opens WhatsApp with your details so we can reply with a plan. See our{" "}
+            <a href="/privacy" className="underline">Privacy Policy</a>.
+          </p>
         </form>
       </CardContent>
     </Card>

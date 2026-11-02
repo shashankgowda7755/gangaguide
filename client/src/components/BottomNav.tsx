@@ -42,7 +42,7 @@ export default function BottomNav({ onWhatsAppClick }: BottomNavProps) {
           })}
           <Button
             onClick={onWhatsAppClick}
-            className="bg-[#25D366] hover:bg-[#20BD5A] text-white border-none shrink-0 flex flex-col items-center gap-1 px-2 sm:px-3 py-2 h-auto min-h-0"
+            className="bg-[#15803d] hover:bg-[#166534] text-white border-none shrink-0 flex flex-col items-center gap-1 px-2 sm:px-3 py-2 h-auto min-h-0"
             data-testid="button-whatsapp-nav"
           >
             <MessageCircle className="w-5 h-5" />

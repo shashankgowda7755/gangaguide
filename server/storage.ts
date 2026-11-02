@@ -14,6 +14,9 @@ import {
 } from "../shared/schema.js";
 import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
+
+// Stable, readable ids so shared links survive restarts (memory store is re-seeded per instance)
+const slugify = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
 import type { NeonDatabase } from 'drizzle-orm/neon-serverless';
 
 export interface IStorage {
@@ -179,7 +182,7 @@ class MemStorage implements IStorage {
   }
 
   async createDestination(insertDestination: InsertDestination): Promise<Destination> {
-    const id = randomUUID();
+    const id = slugify(insertDestination.name) || randomUUID();
     const destination: Destination = { 
       id, 
       ...insertDestination,
@@ -211,7 +214,7 @@ class MemStorage implements IStorage {
   }
 
   async createBlogPost(insertBlogPost: InsertBlogPost): Promise<BlogPost> {
-    const id = randomUUID();
+    const id = slugify(insertBlogPost.title) || randomUUID();
     const blogPost: BlogPost = { 
       id, 
       ...insertBlogPost,
@@ -242,7 +245,7 @@ class MemStorage implements IStorage {
   }
 
   async createPackage(insertPackage: InsertPackage): Promise<Package> {
-    const id = randomUUID();
+    const id = slugify(insertPackage.name) || randomUUID();
     const pkg: Package = { 
       id, 
       ...insertPackage,

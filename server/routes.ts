@@ -1,7 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage.js";
-import { insertDestinationSchema, insertBlogPostSchema, insertPackageSchema } from "../shared/schema.js";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Destination routes
@@ -26,27 +25,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/destinations", async (req, res) => {
-    try {
-      const validatedData = insertDestinationSchema.parse(req.body);
-      const destination = await storage.createDestination(validatedData);
-      res.status(201).json(destination);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  });
 
-  app.patch("/api/destinations/:id", async (req, res) => {
-    try {
-      const destination = await storage.updateDestination(req.params.id, req.body);
-      if (!destination) {
-        return res.status(404).json({ message: "Destination not found" });
-      }
-      res.json(destination);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
 
   // Blog post routes
   app.get("/api/blog-posts", async (req, res) => {
@@ -70,27 +49,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/blog-posts", async (req, res) => {
-    try {
-      const validatedData = insertBlogPostSchema.parse(req.body);
-      const blogPost = await storage.createBlogPost(validatedData);
-      res.status(201).json(blogPost);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  });
 
-  app.patch("/api/blog-posts/:id", async (req, res) => {
-    try {
-      const blogPost = await storage.updateBlogPost(req.params.id, req.body);
-      if (!blogPost) {
-        return res.status(404).json({ message: "Blog post not found" });
-      }
-      res.json(blogPost);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
 
   // Package routes
   app.get("/api/packages", async (req, res) => {
@@ -114,27 +73,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/packages", async (req, res) => {
-    try {
-      const validatedData = insertPackageSchema.parse(req.body);
-      const pkg = await storage.createPackage(validatedData);
-      res.status(201).json(pkg);
-    } catch (error: any) {
-      res.status(400).json({ message: error.message });
-    }
-  });
 
-  app.patch("/api/packages/:id", async (req, res) => {
-    try {
-      const pkg = await storage.updatePackage(req.params.id, req.body);
-      if (!pkg) {
-        return res.status(404).json({ message: "Package not found" });
-      }
-      res.json(pkg);
-    } catch (error: any) {
-      res.status(500).json({ message: error.message });
-    }
-  });
 
   const httpServer = createServer(app);
 

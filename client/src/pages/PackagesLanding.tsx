@@ -74,9 +74,9 @@ export default function PackagesLanding() {
                         <Icon className="w-8 h-8 text-primary" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="font-display text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
+                        <h2 className="font-display text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
                           {category.title}
-                        </h3>
+                        </h2>
                         <p className="text-muted-foreground">
                           {category.description}
                         </p>

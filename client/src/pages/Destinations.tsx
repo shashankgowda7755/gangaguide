@@ -78,7 +78,7 @@ export default function Destinations() {
                 <Badge
                   key={region}
                   className={`cursor-pointer ${regionFilter === region ? "bg-primary" : "bg-muted hover-elevate"}`}
-                  onClick={() => setRegionFilter(region)}
+                  onClick={() => setRegionFilter(region ?? "")}
                   data-testid={`filter-region-${region?.toLowerCase()}`}
                 >
                   {region}

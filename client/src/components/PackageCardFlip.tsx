@@ -80,6 +80,7 @@ export default function PackageCardFlip({
                   className="border-[#25D366] text-[#25D366] hover:bg-[#25D366]/10"
                   onClick={onEnquireNow}
                   data-testid="button-whatsapp-icon"
+                  aria-label="Enquire on WhatsApp"
                 >
                   <FaWhatsapp className="w-5 h-5" />
                 </Button>
