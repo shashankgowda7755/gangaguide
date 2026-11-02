@@ -1,5 +1,5 @@
 import { storage } from "./storage";
-import { log } from "./vite";
+const log = (msg: string) => console.log(`[seed] ${msg}`);
 
 export async function seedDatabase() {
   try {
