@@ -1,6 +1,11 @@
 node_modules
 dist
 .DS_Store
-server/public
-vite.config.ts.*
+.env
+.env.*
+data/
 *.tar.gz
+.vercel
+photos/*
+!photos/README.md
+qa-shots/

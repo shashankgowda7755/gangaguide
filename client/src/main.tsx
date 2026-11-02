@@ -1,5 +1,9 @@
-import { createRoot } from "react-dom/client";
+import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App";
-import "./index.css";
+import { captureUtm } from "./lib/utm";
+import "./styles/site.css";
 
-createRoot(document.getElementById("root")!).render(<App />);
+captureUtm();
+const el = document.getElementById("root")!;
+if (el.hasChildNodes()) hydrateRoot(el, <App />);
+else createRoot(el).render(<App />);
