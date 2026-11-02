@@ -20,7 +20,7 @@ export function TripIndex({ headingLevel = 3 }: { headingLevel?: 2 | 3 }) {
                 <li className="trip-row" key={t.slug}>
                   <Link href={`/packages/${t.slug}`}>
                     <span>
-                      <span className="trip-row__name">{t.name}</span>
+                      <span className="trip-row__name">{t.name}<span className="sr-only">.</span></span>
                       <span className="trip-row__sum">{t.summary}</span>
                     </span>
                     <span className="trip-row__dur">{t.duration}</span>

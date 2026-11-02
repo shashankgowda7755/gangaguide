@@ -17,10 +17,10 @@ export function PlacesPage() {
           {places.map((p) => (
             <Link key={p.slug} href={`/destinations/${p.slug}`} className="place-link">
               <Photo want={p.photo} ratio="4 / 3" />
-              <span className="dist">{p.fromVaranasi === "Base city" ? "Base city" : `${p.fromVaranasi} from Varanasi`}</span>
               <h2 style={{ fontSize: "var(--text-2xl)" }}>
                 {p.name} <span lang="hi">{p.hindi}</span>
               </h2>
+              <span className="dist">{p.fromVaranasi === "Base city" ? "Base city" : `${p.fromVaranasi} from Varanasi`}</span>
               <span className="muted">{p.summary}</span>
             </Link>
           ))}

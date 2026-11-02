@@ -73,7 +73,7 @@ export function GhatMap() {
     <div className="map">
       <River shape={TALL} active={active} onPick={setActive} className="map__svg--tall" />
       <River shape={COMPACT} active={active} onPick={setActive} className="map__svg--compact" />
-      <ol className="map__legend" reversed aria-label="Ghats from north to south">
+      <ol className="map__legend" reversed aria-label="Ghats from north to south. Choosing a ghat marks it on the drawing.">
         {[...ghats.keys()].reverse().map((i) => {
           const g = ghats[i];
           const trip = g.trip ? tripBySlug(g.trip) : undefined;

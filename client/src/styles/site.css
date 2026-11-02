@@ -177,6 +177,9 @@ a:hover { text-decoration-thickness: 2px; }
 .place-link h3 { font-family: var(--font-display); font-weight: 400; font-size: var(--text-2xl); }
 .place-link:hover h3 { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
 .place-link .dist { font-size: var(--text-sm); color: var(--color-river); font-weight: 600; }
+/* distance shows above the name but is read after it */
+.place-link .photo { order: -2; }
+.place-link .dist { order: -1; }
 @media (max-width: 860px) { .places { grid-template-columns: minmax(0, 1fr); } }
 
 /* split layout for detail pages */

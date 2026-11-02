@@ -87,10 +87,10 @@ export default function Home() {
               .map((p) => (
                 <Link key={p.slug} href={`/destinations/${p.slug}`} className="place-link">
                   <Photo want={p.photo} ratio="4 / 3" />
-                  <span className="dist">{p.fromVaranasi} from Varanasi</span>
                   <h3>
                     {p.name} <span lang="hi">{p.hindi}</span>
                   </h3>
+                  <span className="dist">{p.fromVaranasi} from Varanasi</span>
                   <span className="muted">{p.summary}</span>
                 </Link>
               ))}
