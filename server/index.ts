@@ -1,6 +1,7 @@
 import express from "express";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
+import { brotliCompressSync, gzipSync } from "node:zlib";
 import { handleLead } from "./leads.js";
 import { guardCheck, handleHumanCheck } from "./guard.js";
 import { securityHeaders } from "./headers.js";
@@ -38,6 +39,25 @@ app.all("/api/*", (_req, res) => void res.status(404).json({ ok: false, error: "
 
 if (prod) {
   const pub = path.join(root, "dist/public");
+  // Vercel's CDN compresses text responses; do the same here so local Lighthouse numbers match.
+  const packed = new Map<string, Buffer>();
+  const types: Record<string, string> = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".svg": "image/svg+xml", ".xml": "application/xml", ".txt": "text/plain; charset=utf-8" };
+  app.get(/^\/[a-zA-Z0-9/._-]*$/, async (req, res, next) => {
+    const enc = /\bbr\b/.test(req.headers["accept-encoding"] || "") ? "br" : /\bgzip\b/.test(req.headers["accept-encoding"] || "") ? "gzip" : "";
+    const rel = /\.[a-z0-9]+$/.test(req.path) ? req.path : path.join(req.path, "index.html");
+    const file = path.join(pub, rel);
+    const type = types[path.extname(file)];
+    if (!enc || !type || !file.startsWith(pub + path.sep)) return next();
+    const key = `${enc}:${file}`;
+    if (!packed.has(key)) {
+      const raw = await readFile(file).catch(() => null);
+      if (!raw) return next();
+      packed.set(key, enc === "br" ? brotliCompressSync(raw) : gzipSync(raw));
+    }
+    res.set({ "Content-Type": type, "Content-Encoding": enc, Vary: "Accept-Encoding" });
+    if (req.path.startsWith("/assets/")) res.set("Cache-Control", "public, max-age=31536000, immutable");
+    res.send(packed.get(key));
+  });
   app.use("/assets", express.static(path.join(pub, "assets"), { immutable: true, maxAge: "1y" }));
   app.use(express.static(pub, { redirect: false }));
   // clean URLs: /packages/x -> dist/public/packages/x/index.html (same as Vercel)

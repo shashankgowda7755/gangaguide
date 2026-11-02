@@ -2,7 +2,7 @@
  * Build step 3: render every route to static HTML so crawlers (and visitors without JS) get the
  * full page. Also writes 404.html, sitemap.xml, robots.txt and llms.txt, and prints open TODO(ask)s.
  */
-import { readFile, writeFile, mkdir, rm } from "node:fs/promises";
+import { readFile, readdir, writeFile, mkdir, rm } from "node:fs/promises";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
@@ -15,7 +15,21 @@ const { render, staticPaths, openTodos } = ssr as {
   openTodos: () => string[];
 };
 
-const template = await readFile(path.join(pub, "index.html"), "utf8");
+// Inline the one stylesheet (~5 kB gzip) so first paint needs no extra request, and preload the
+// three Latin fonts used above the fold so they arrive with the HTML (no late swap).
+let template = await readFile(path.join(pub, "index.html"), "utf8");
+const cssLink = template.match(/<link rel="stylesheet"[^>]*href="(\/assets\/[^"]+\.css)"[^>]*>/);
+if (cssLink) {
+  const css = await readFile(path.join(pub, cssLink[1]), "utf8");
+  template = template.replace(cssLink[0], () => `<style>${css}</style>`);
+}
+const fonts = (await readdir(path.join(pub, "assets"))).filter((f) =>
+  /^(young-serif-latin-400|mukta-latin-400|mukta-latin-600)-normal-.*\.woff2$/.test(f),
+);
+template = template.replace(
+  "<!--head-->",
+  fonts.map((f) => `<link rel="preload" href="/assets/${f}" as="font" type="font/woff2" crossorigin>`).join("") + "<!--head-->",
+);
 const page = (p: string) => {
   const r = render(p);
   return template.replace("<!--head-->", r.head).replace("<!--app-->", r.html);

@@ -4,6 +4,11 @@
  * display: Young Serif (roman) · body: Mukta (Latin + Devanagari) · both self-hosted via @fontsource
  * axes: light / roman-serif / warm · nav: N9 edge-aligned · footer: Ft5 statement
  */
+/* metric-matched fallbacks (fontTools: width + hhea ascent/descent vs Georgia / Arial) so the
+ * swap to the web fonts does not move the layout (CLS) */
+@font-face { font-family: "Young Serif Fallback"; src: local("Georgia"), local("Times New Roman"); size-adjust: 113.3%; ascent-override: 92.3%; descent-override: 32.3%; line-gap-override: 0%; }
+@font-face { font-family: "Mukta Fallback"; src: local("Arial"), local("Helvetica"), local("Roboto"); font-weight: 400; size-adjust: 93.1%; ascent-override: 121.4%; descent-override: 57.1%; line-gap-override: 0%; }
+@font-face { font-family: "Mukta Fallback"; src: local("Arial Bold"), local("Arial-BoldMT"), local("Helvetica Bold"), local("Roboto Bold"); font-weight: 600; size-adjust: 90.5%; ascent-override: 124.9%; descent-override: 58.8%; line-gap-override: 0%; }
 :root {
   /* colour */
   --color-paper: oklch(97% 0.012 85);
@@ -33,8 +38,8 @@
   --shadow-2: 0 10px 30px oklch(24% 0.025 50 / 0.18);
 
   /* type */
-  --font-display: "Young Serif", "Georgia", serif;
-  --font-body: "Mukta", "Noto Sans Devanagari", system-ui, sans-serif;
+  --font-display: "Young Serif", "Young Serif Fallback", "Georgia", serif;
+  --font-body: "Mukta", "Mukta Fallback", "Noto Sans Devanagari", system-ui, sans-serif;
   --text-xs: 0.8125rem;
   --text-sm: 0.9375rem;
   --text-base: 1.0625rem;
