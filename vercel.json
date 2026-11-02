@@ -1,39 +1,18 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": null,
-  "installCommand": "npm ci",
-  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "buildCommand": "npm run vercel-build",
   "outputDirectory": "dist/public",
-  "cleanUrls": true,
-  "trailingSlash": false,
   "ignoreCommand": "if [ \"$VERCEL_ENV\" = \"production\" ] || echo \"$VERCEL_GIT_COMMIT_REF\" | grep -q '^preview/'; then exit 1; else exit 0; fi",
-  "functions": {
-    "api/*.ts": { "maxDuration": 10 }
-  },
-  "redirects": [
-    { "source": "/booking", "destination": "/contact", "permanent": true },
-    { "source": "/blog", "destination": "/journal", "permanent": true },
-    { "source": "/blog/:id", "destination": "/journal", "permanent": true },
-    { "source": "/package/:id", "destination": "/packages", "permanent": true },
-    { "source": "/destination/:id", "destination": "/destinations", "permanent": true },
-    { "source": "/packages/tourist", "destination": "/packages#day-trips", "permanent": true },
-    { "source": "/packages/pooja", "destination": "/packages#pooja", "permanent": true },
-    { "source": "/packages/popular-events", "destination": "/packages#festivals", "permanent": true }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index" },
+    { "source": "/((?!api/|assets/|attached_assets/|favicon).*)", "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'" },
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()" }
-      ]
     }
   ]
 }
