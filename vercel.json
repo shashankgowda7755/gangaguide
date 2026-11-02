@@ -14,7 +14,7 @@
     },
     {
       "source": "/((?!api/|assets/|attached_assets/|favicon).*)",
-      "destination": "/index.html"
+      "destination": "/"
     }
   ],
   "headers": [
