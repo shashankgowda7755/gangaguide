@@ -155,7 +155,7 @@ export const trips: Trip[] = [
     summary: "The month-long open-air Ramlila of Ramnagar, performed without microphones or electric light.",
     highlights: [
       "Ramlila performed across open-air sites in Ramnagar",
-      "Listed by UNESCO as intangible cultural heritage (Ramlila tradition)",
+      "Part of the Ramlila tradition on UNESCO's intangible cultural heritage list (2008)",
       "Guide who narrates the episode of the evening",
       "Return to the ghats after the performance",
     ],
@@ -176,13 +176,13 @@ export const trips: Trip[] = [
     priceFrom: 8500,
     summary: "Kartik Purnima, when the ghats are lined with diyas, seen from the river.",
     highlights: [
-      "Ganga Mahotsav cultural programmes in the days before",
+      "Ganga Mahotsav cultural programmes in the days leading up to it",
       "Dev Deepawali evening on Kartik Purnima",
       "Boat on the river for the evening of lamps",
       "Morning boat the next day, when the ghats are quiet again",
     ],
     body: [
-      "On Kartik Purnima, the full moon of the month of Kartik, the ghats of Varanasi are lined with earthen lamps from end to end. In the days before, the Ganga Mahotsav brings music and dance to the riverfront.",
+      "On Kartik Purnima, the full moon of the month of Kartik, the ghats of Varanasi are lined with earthen lamps from end to end. In the five days leading up to it, Uttar Pradesh Tourism's Ganga Mahotsav brings music and dance to the riverfront.",
       "Boats and rooms book out early for this week. Enquire as soon as you know your dates.",
     ],
     places: ["varanasi"],

@@ -113,7 +113,7 @@ export const ghats: Ghat[] = [
   { name: "Assi", note: "Southern end. Morning aarti and music at dawn.", trip: "kashi-darshan-one-day" },
   { name: "Tulsi", note: "Where Tulsidas is said to have written much of the Ramcharitmanas." },
   { name: "Harishchandra", note: "One of the two cremation ghats. Watch quietly." },
-  { name: "Kedar", note: "Striped red-and-white steps up to the Kedareshwar temple." },
+  { name: "Kedar", note: "Brightly painted steps up to the Kedareshwar temple." },
   { name: "Dashashwamedh", note: "The evening Ganga aarti. Watch from the steps or a boat.", trip: "ganga-aarti-ritual" },
   { name: "Manikarnika", note: "The main cremation ghat, burning day and night. No photos.", trip: "kashi-darshan-one-day" },
   { name: "Scindia", note: "A half-sunken Shiva temple leaning into the river." },

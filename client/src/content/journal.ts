@@ -36,7 +36,7 @@ export const posts: Post[] = [
       {
         heading: "When to arrive",
         paras: [
-          "The aarti starts before sunrise, so the time shifts through the year: earlier in summer, later in winter. The programme begins about 45 minutes before sunrise, so be on the steps by then. Your guide will give you the exact time for your date.",
+          "The aarti starts before sunrise, so the time shifts through the year: earlier in summer, later in winter. Aim to be on the steps about 45 minutes before sunrise. Your guide will give you the exact time for your date.",
         ],
       },
       {
@@ -66,7 +66,7 @@ export const posts: Post[] = [
       },
       {
         heading: "1. Tulsi Manas Mandir",
-        paras: ["A white marble temple from 1964, dedicated to Ram. Verses of the Ramcharitmanas are carved across its walls."],
+        paras: ["A white marble temple completed in 1964, dedicated to Ram and named after Tulsidas, who wrote the Ramcharitmanas."],
       },
       {
         heading: "2. Nepali Temple",
@@ -178,7 +178,7 @@ export const faqs: { q: string; a: string }[] = [
   },
   {
     q: "Can I take my phone into Kashi Vishwanath?",
-    a: "Phones, bags and leather items are not allowed inside the temple. There are lockers near the gates; your guide will show you where.",
+    a: "Phones, cameras and other electronics are not allowed inside the temple. There are lockers near the gates; your guide will show you where.",
   },
   {
     q: "Can you help with stays and transport?",
