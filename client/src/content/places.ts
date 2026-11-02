@@ -27,7 +27,7 @@ export const places: Place[] = [
     see: [
       { name: "Dashashwamedh Ghat", note: "The main ghat and the site of the evening Ganga aarti." },
       { name: "Kashi Vishwanath", note: "The temple of Shiva at the centre of the old city." },
-      { name: "Assi Ghat", note: "Southern end of the ghats; the morning aarti draws a local crowd." },
+      { name: "Assi Ghat", note: "Southern end of the ghats, and home of the dawn aarti, Subah-e-Banaras." },
       { name: "Manikarnika Ghat", note: "The main cremation ghat. Watch quietly; no photography." },
       { name: "Sankat Mochan", note: "Hanuman temple associated with the poet-saint Tulsidas." },
     ],
@@ -81,14 +81,14 @@ export const places: Place[] = [
     slug: "prayagraj",
     name: "Prayagraj",
     hindi: "प्रयागराज",
-    fromVaranasi: "About 120 km",
+    fromVaranasi: "About 125 km",
     summary: "The Triveni Sangam, where the Ganga meets the Yamuna and, in tradition, the hidden Saraswati.",
     body: [
       "Prayagraj, formerly Allahabad, holds the Triveni Sangam, the confluence of the Ganga and the Yamuna, joined in tradition by the unseen Saraswati. It is one of the four sites of the Kumbh Mela.",
       "A boat takes you out to the meeting point, where you can see the two rivers' different colours side by side. The fort and the Akshayavat, the immortal banyan, are close by.",
       "The city was renamed from Allahabad to Prayagraj in 2018. The Mughal emperor Akbar built the fort at the Sangam in 1583; most of it is still used by the army, but the Patalpuri temple and the Akshayavat inside can be visited when open. Just outside the fort, the Bade Hanuman temple has a large reclining image of Hanuman.",
       "Every January and February the Magh Mela brings pilgrims to camp on the sandbanks. The Kumbh Mela comes round every twelve years, with an Ardh Kumbh in between; the most recent Maha Kumbh was held from January to February 2025. In those weeks the city is far busier and roads around the Sangam close to traffic.",
-      "Prayagraj is about 120 km from Varanasi, roughly three hours by road, so the Sangam can be done as a long day trip. Go early: the river is calmer, the light is softer and the boats are less crowded.",
+      "Prayagraj is about 125 km from Varanasi, two and a half to three hours by road, so the Sangam can be done as a long day trip. Go early: the river is calmer, the light is softer and the boats are less crowded.",
     ],
     see: [
       { name: "Triveni Sangam", note: "Boat out to the confluence for a holy dip or a prayer." },
@@ -118,5 +118,5 @@ export const ghats: Ghat[] = [
   { name: "Manikarnika", note: "The main cremation ghat, burning day and night. No photos.", trip: "kashi-darshan-one-day" },
   { name: "Scindia", note: "A half-sunken Shiva temple leaning into the river." },
   { name: "Panchganga", note: "Where five rivers are said to meet; Alamgir mosque above." },
-  { name: "Raj Ghat", note: "Northern end, by the Malviya bridge. Ganga Mahotsav stage.", trip: "dev-deepawali" },
+  { name: "Raj Ghat", note: "Northern end of the main run of ghats.", trip: "dev-deepawali" },
 ];

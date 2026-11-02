@@ -76,7 +76,7 @@ export const trips: Trip[] = [
     ],
     body: [
       "Day one follows the one-day Kashi route: sunrise boat, the lanes, darshan and the evening aarti.",
-      "Day two is slower. Sarnath is about 10 km from the ghats. You see the Dhamek Stupa, the ruins of the old monasteries and the museum, which holds the Lion Capital of Ashoka. The museum is closed on Fridays, so plan the day around that.",
+      "Day two is slower. Sarnath is about 10 km north-east of the city. You see the Dhamek Stupa, the ruins of the old monasteries and the museum, which holds the Lion Capital of Ashoka. The museum is closed on Fridays, so plan the day around that.",
     ],
     places: ["varanasi", "sarnath"],
     photo: "Dhamek Stupa at Sarnath, late afternoon",

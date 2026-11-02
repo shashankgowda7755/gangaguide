@@ -23,8 +23,8 @@ export const posts: Post[] = [
     sections: [
       {
         paras: [
-          "Most visitors know the evening aarti at Dashashwamedh: crowds, bells, boats packed six deep. Fewer know that the day also begins with an aarti, at Assi Ghat at the southern end of the city, while the river is still grey.",
-          "It is smaller and quieter, and much of the crowd is local: people who come to the river every morning before work.",
+          "Most visitors know the evening aarti at Dashashwamedh: crowds, bells, boats packed close together. Fewer know that the day also begins with an aarti, at Assi Ghat at the southern end of the city, while the river is still grey.",
+          "It is smaller and quieter. Since 2014 it has run as a morning programme called Subah-e-Banaras.",
         ],
       },
       {
@@ -36,7 +36,7 @@ export const posts: Post[] = [
       {
         heading: "When to arrive",
         paras: [
-          "The aarti starts before sunrise, so the time shifts through the year: earlier in summer, later in winter. Aim to be on the steps about half an hour before sunrise. Your guide will give you the exact time for your date.",
+          "The aarti starts before sunrise, so the time shifts through the year: earlier in summer, later in winter. The programme begins about 45 minutes before sunrise, so be on the steps by then. Your guide will give you the exact time for your date.",
         ],
       },
       {
@@ -71,7 +71,7 @@ export const posts: Post[] = [
       {
         heading: "2. Nepali Temple",
         paras: [
-          "Built by the royal family of Nepal in the nineteenth century, close to Lalita Ghat. It is made of wood in the Kathmandu style, which is why it is also called the Kathwala temple.",
+          "Built by the royal family of Nepal in the nineteenth century, close to Lalita Ghat. It is a wooden, pagoda-style temple modelled on Pashupatinath in Kathmandu.",
         ],
       },
       {
@@ -81,7 +81,7 @@ export const posts: Post[] = [
       {
         heading: "4. Sankat Mochan Hanuman Temple",
         paras: [
-          "Associated with the poet-saint Tulsidas, and much loved in the city. Tuesdays and Saturdays are the busy days; the music festival each spring fills the courtyard for nights on end.",
+          "Associated with the poet-saint Tulsidas, and much loved in the city. Tuesdays and Saturdays are the busy days. Around Hanuman Jayanti in April, the free Sankat Mochan Sangeet Samaroh fills the courtyard with music for six nights.",
         ],
       },
       {
