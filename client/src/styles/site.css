@@ -41,7 +41,8 @@ a:hover { text-decoration-thickness: 2px; }
 .skip-link:focus { top: var(--space-2); }
 
 /* header · N9 edge-aligned */
-.site-header { position: sticky; top: 0; z-index: 40; background: var(--color-paper); border-bottom: var(--rule-hair); }
+.site-header { position: sticky; top: 0; z-index: 40; background: var(--color-paper); border-bottom: var(--rule-hair); transition: box-shadow var(--dur-base) var(--ease-out); }
+.site-header[data-scrolled="true"] { box-shadow: var(--shadow-2); }
 .site-header__bar { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); min-height: 4rem; }
 .wordmark { font-family: var(--font-display); font-size: 1.45rem; color: var(--color-ink); text-decoration: none; white-space: nowrap; display: inline-flex; align-items: baseline; gap: var(--space-2); }
 .wordmark span { font-family: var(--font-body); font-size: var(--text-sm); color: var(--color-ink-2); }
@@ -61,6 +62,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* buttons · 8 states */
 .btn {
+  position: relative;
   display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
   min-height: 48px; padding: var(--space-3) var(--space-5);
   border: 2px solid var(--color-ink); border-radius: var(--radius-pill);
@@ -255,6 +257,7 @@ a:hover { text-decoration-thickness: 2px; }
 /* footer · Ft5 statement */
 .site-footer { background: var(--color-ink); color: var(--color-on-dark); padding-block: var(--space-8) var(--space-6); margin-top: 0; }
 .site-footer a { color: var(--color-on-dark); }
+.site-footer a.btn:not(.btn--ghost) { color: var(--color-on-saffron); }
 .site-footer__statement { font-family: var(--font-display); font-size: var(--text-3xl); line-height: var(--leading-tight); max-width: 20ch; margin-bottom: var(--space-5); }
 .site-footer__grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-6); margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--color-ink-2); font-size: var(--text-sm); }
 .site-footer__grid ul { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-2); }
@@ -268,7 +271,9 @@ a:hover { text-decoration-thickness: 2px; }
 .to-top { position: fixed; right: var(--space-4); bottom: 5.25rem; z-index: 30; width: 44px; height: 44px; border-radius: var(--radius-pill); border: 2px solid var(--color-ink); background: var(--color-paper); color: var(--color-ink); font: 600 1.1rem/1 var(--font-body); cursor: pointer; }
 .to-top:hover { background: var(--color-paper-2); }
 .cookie { position: fixed; left: var(--space-4); bottom: var(--space-4); z-index: 50; max-width: min(28rem, calc(100vw - 2 * var(--space-4))); background: var(--color-paper); border: var(--rule-ink); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); font-size: var(--text-sm); box-shadow: var(--shadow-2); }
-.cookie p { margin-bottom: var(--space-3); }
+.cookie { display: flex; gap: var(--space-4); align-items: center; }
+.cookie p { margin: 0; }
+.cookie .btn { min-height: 44px; padding-inline: var(--space-4); }
 body:has(.cookie) .wa-float, body:has(.cookie) .to-top { visibility: hidden; }
 @media (min-width: 900px) { body:has(.cookie) .wa-float, body:has(.cookie) .to-top { visibility: visible; } }
 
@@ -301,3 +306,12 @@ body:has(.cookie) .wa-float, body:has(.cookie) .to-top { visibility: hidden; }
   .site-footer { background: var(--color-print-bg); color: var(--color-print-ink); padding: 0; }
   .split { grid-template-columns: 1fr; }
 }
+
+/* search */
+.search-box { display: grid; gap: var(--space-2); max-width: 36rem; margin-bottom: var(--space-6); }
+.search-box input { font: inherit; font-size: var(--text-lg); min-height: 52px; padding: var(--space-2) var(--space-4); border: 2px solid var(--color-ink); border-radius: var(--radius-pill); background: var(--color-paper); color: var(--color-ink); }
+.search-box input:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+.results { list-style: none; margin: 0; padding: 0; border-top: var(--rule-ink); }
+.results li { border-bottom: var(--rule-hair); padding-block: var(--space-4); }
+.results a { font-family: var(--font-display); font-size: var(--text-lg); }
+.results .kind { display: block; font-size: var(--text-xs); color: var(--color-ink-2); }

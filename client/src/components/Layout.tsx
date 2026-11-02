@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Link, useLocation } from "wouter";
 import { site, whatsappLink } from "@/site.config";
 import { Todo } from "./Bits";
@@ -13,18 +13,50 @@ const NAV = [
 function Header() {
   const [path] = useLocation();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const header = useRef<HTMLElement>(null);
+  const btn = useRef<HTMLButtonElement>(null);
   useEffect(() => setOpen(false), [path]);
+  useEffect(() => {
+    const on = () => setScrolled(window.scrollY > 8);
+    window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
+  // mobile menu: Esc closes, focus stays inside, page behind does not scroll
+  useEffect(() => {
+    if (!open) return;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        btn.current?.focus();
+      }
+      if (e.key === "Tab" && header.current) {
+        const f = header.current.querySelectorAll<HTMLElement>("a, button");
+        const first = f[0];
+        const last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) (e.preventDefault(), last.focus());
+        else if (!e.shiftKey && document.activeElement === last) (e.preventDefault(), first.focus());
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = "";
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
   const current = (href: string) => (path === href || path.startsWith(href + "/") ? "page" : undefined);
   return (
-    <header className="site-header">
+    <header className="site-header" ref={header} data-scrolled={scrolled}>
       <div className="wrap site-header__bar">
-        <Link href="/" className="wordmark" aria-label={`${site.brandName}, home`}>
+        <Link href="/" className="wordmark">
           {site.brandName}
           <span>Varanasi</span>
         </Link>
         <button
           type="button"
           className="menu-btn"
+          ref={btn}
           aria-expanded={open}
           aria-controls="site-nav"
           onClick={() => setOpen((o) => !o)}
@@ -93,6 +125,7 @@ function Footer() {
             <li><Link href="/destinations">Destinations</Link></li>
             <li><Link href="/journal">Journal</Link></li>
             <li><Link href="/faq">Questions</Link></li>
+            <li><Link href="/search">Search</Link></li>
             <li><Link href="/about">About</Link></li>
           </ul>
           <ul aria-label="Policies">
@@ -128,7 +161,7 @@ function Floating() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <>
+    <aside aria-label="Quick contact">
       <a className="btn btn--ink wa-float" href={whatsappLink(`Namaste ${site.brandName}, I'd like to plan a trip.`)} target="_blank" rel="noopener">
         WhatsApp<span className="sr-only"> us (opens in a new tab)</span>
       </a>
@@ -159,7 +192,7 @@ function Floating() {
           </button>
         </div>
       )}
-    </>
+    </aside>
   );
 }
 

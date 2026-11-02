@@ -6,3 +6,5 @@ dist
 data/
 *.tar.gz
 .vercel
+photos/*
+!photos/README.md

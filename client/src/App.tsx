@@ -9,6 +9,7 @@ import { PlacesPage, PlacePage } from "@/pages/Places";
 import { JournalPage, PostPage } from "@/pages/Journal";
 import { AboutPage, ContactPage, FaqPage } from "@/pages/Info";
 import { PrivacyPage, TermsPage, CancellationPage, CookiesPage } from "@/pages/Legal";
+import { SearchPage } from "@/pages/Search";
 import NotFound from "@/pages/NotFound";
 
 /** Keeps <title> and the description in sync on client-side navigation (the prerender writes the first one). */
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={ContactPage} />
         <Route path="/faq" component={FaqPage} />
+        <Route path="/search" component={SearchPage} />
         <Route path="/privacy" component={PrivacyPage} />
         <Route path="/terms" component={TermsPage} />
         <Route path="/cancellation-policy" component={CancellationPage} />

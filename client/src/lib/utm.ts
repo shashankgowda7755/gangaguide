@@ -1,6 +1,6 @@
 /** Keeps the first-touch UTM tags for this browser session so an enquiry records its source. */
 const KEY = "gg-utm";
-const TAGS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"] as const;
+const TAGS = ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "gclid", "fbclid"] as const;
 
 export function captureUtm() {
   try {

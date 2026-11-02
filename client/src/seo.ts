@@ -145,6 +145,7 @@ export function metaFor(path: string): Meta {
   const simple: Record<string, Meta> = {
     "/about": { title: t("About"), description: `Who we are and how we plan trips in Varanasi and around.` },
     "/contact": { title: t("Plan a trip"), description: "Send your dates and group size. We reply on WhatsApp with a plan and a price before you pay anything." },
+    "/search": { title: t("Search"), description: "Search trips, destinations, journal posts and questions." },
     "/faq": { title: t("Questions"), description: "Booking, prices, seasons, temple rules and photography at the ghats.", jsonld: [faqLd(faqs)] },
     "/privacy": { title: t("Privacy policy"), description: "What we collect when you enquire, why, how long we keep it and your rights under India's DPDP Act." },
     "/terms": { title: t("Terms"), description: "Terms for using this website and booking trips." },
@@ -168,6 +169,7 @@ export const staticPaths: string[] = [
   "/about",
   "/contact",
   "/faq",
+  "/search",
   "/privacy",
   "/terms",
   "/cancellation-policy",
