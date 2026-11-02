@@ -11,7 +11,7 @@ import {
   type InsertBlogPost,
   type Package,
   type InsertPackage
-} from "@shared/schema";
+} from "../shared/schema.js";
 import { eq } from "drizzle-orm";
 import { randomUUID } from "crypto";
 import type { NeonDatabase } from 'drizzle-orm/neon-serverless';
