@@ -18,27 +18,27 @@ import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import BottomNav from "@/components/BottomNav";
 
-import heroImage1 from "@assets/generated_images/Calm_Ganga_morning_sunrise_cb8f5772.png";
-import heroImage2 from "@assets/generated_images/Evening_aarti_ceremony_Varanasi_fdd358a3.png";
-import heroImage3 from "@assets/generated_images/Dev_Deepawali_festival_night_806cde54.png";
-import heroImage4 from "@assets/generated_images/Varanasi_temple_architecture_detail_a35f07ab.png";
-import heroImage5 from "@assets/generated_images/Boat_perspective_Ganges_view_e308dae7.png";
+import heroImage1 from "@assets/generated_images/Calm_Ganga_morning_sunrise_cb8f5772.webp";
+import heroImage2 from "@assets/generated_images/Evening_aarti_ceremony_Varanasi_fdd358a3.webp";
+import heroImage3 from "@assets/generated_images/Dev_Deepawali_festival_night_806cde54.webp";
+import heroImage4 from "@assets/generated_images/Varanasi_temple_architecture_detail_a35f07ab.webp";
+import heroImage5 from "@assets/generated_images/Boat_perspective_Ganges_view_e308dae7.webp";
 
-import package1 from "@assets/generated_images/Kashi_walking_tour_group_d0392eea.png";
-import package2 from "@assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.png";
-import package3 from "@assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.png";
+import package1 from "@assets/generated_images/Kashi_walking_tour_group_d0392eea.webp";
+import package2 from "@assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.webp";
+import package3 from "@assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.webp";
 
-import varanasi from "@assets/generated_images/Boat_perspective_Ganges_view_e308dae7.png";
-import ayodhya from "@assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.png";
-import sarnath from "@assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.png";
-import prayagraj from "@assets/generated_images/Prayagraj_Triveni_Sangam_confluence_c12597e6.png";
+import varanasi from "@assets/generated_images/Boat_perspective_Ganges_view_e308dae7.webp";
+import ayodhya from "@assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.webp";
+import sarnath from "@assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.webp";
+import prayagraj from "@assets/generated_images/Prayagraj_Triveni_Sangam_confluence_c12597e6.webp";
 
-import guide1 from "@assets/generated_images/Local_tour_guide_portrait_a60f1ce8.png";
-import guide2 from "@assets/generated_images/Female_guide_portrait_professional_c50981da.png";
+import guide1 from "@assets/generated_images/Local_tour_guide_portrait_a60f1ce8.webp";
+import guide2 from "@assets/generated_images/Female_guide_portrait_professional_c50981da.webp";
 
-import blog1 from "@assets/generated_images/Morning_meditation_Ganges_sunrise_001c3280.png";
-import blog2 from "@assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f0199e.png";
-import blog3 from "@assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.png";
+import blog1 from "@assets/generated_images/Morning_meditation_Ganges_sunrise_001c3280.webp";
+import blog2 from "@assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f0199e.webp";
+import blog3 from "@assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.webp";
 
 export default function Home() {
   const [, setLocation] = useLocation();

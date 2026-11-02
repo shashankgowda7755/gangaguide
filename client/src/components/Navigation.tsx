@@ -19,11 +19,13 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
   }, []);
 
   const isActive = (path: string) => location === path;
+  // Transparent white header only over the home hero; inner pages have light backgrounds
+  const solid = isScrolled || location !== "/";
 
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        isScrolled
+        solid
           ? "bg-background/95 backdrop-blur-lg shadow-lg border-b border-border"
           : "bg-transparent text-white"
       }`}
@@ -42,7 +44,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                 </svg>
               </div>
               <span className={`font-display text-2xl md:text-3xl font-bold transition-colors ${
-                isScrolled ? "text-foreground" : "text-white"
+                solid ? "text-foreground" : "text-white"
               }`}>
                 Ganga Gates
               </span>
@@ -56,7 +58,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                   className={`text-sm font-medium transition-colors hover-elevate px-3 py-2 rounded-md ${
                     isActive("/")
                       ? "text-primary"
-                      : isScrolled ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                      : solid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                   data-testid="nav-home"
                 >
@@ -68,7 +70,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                   className={`text-sm font-medium transition-colors hover-elevate px-3 py-2 rounded-md ${
                     isActive("/packages")
                       ? "text-primary"
-                      : isScrolled ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                      : solid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                   data-testid="nav-packages"
                 >
@@ -80,7 +82,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                   className={`text-sm font-medium transition-colors hover-elevate px-3 py-2 rounded-md ${
                     isActive("/destinations")
                       ? "text-primary"
-                      : isScrolled ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                      : solid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                   data-testid="nav-destinations"
                 >
@@ -92,7 +94,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                   className={`text-sm font-medium transition-colors hover-elevate px-3 py-2 rounded-md ${
                     isActive("/blog")
                       ? "text-primary"
-                      : isScrolled ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                      : solid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                   data-testid="nav-blog"
                 >
@@ -104,7 +106,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
                   className={`text-sm font-medium transition-colors hover-elevate px-3 py-2 rounded-md ${
                     isActive("/about")
                       ? "text-primary"
-                      : isScrolled ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
+                      : solid ? "text-foreground hover:text-primary" : "text-white/90 hover:text-white"
                   }`}
                   data-testid="nav-about"
                 >
@@ -116,7 +118,7 @@ export default function Navigation({ onBookNowClick }: NavigationProps) {
             <Button
               onClick={onBookNowClick}
               size="lg"
-              className="bg-primary text-primary-foreground border border-primary-border font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="hidden sm:inline-flex bg-primary text-primary-foreground border border-primary-border font-semibold shadow-lg hover:shadow-xl transition-all"
               data-testid="button-plan-journey"
             >
               Plan Your Journey

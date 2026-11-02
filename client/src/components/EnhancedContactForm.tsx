@@ -51,7 +51,7 @@ export default function EnhancedContactForm({ onSubmit, onWhatsAppClick }: Enhan
   };
 
   return (
-    <Card className="max-w-4xl mx-auto border-2 border-primary/20 shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 overflow-hidden" data-testid="form-contact">
+    <Card className="relative max-w-4xl mx-auto border-2 border-primary/20 shadow-2xl bg-gradient-to-br from-card via-card to-primary/5 overflow-hidden" data-testid="form-contact">
       <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
       
