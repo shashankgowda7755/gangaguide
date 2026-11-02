@@ -1,0 +1,77 @@
+/* Hallmark · macrostructure: Map / Diagram · tone: editorial, warm, unhurried · anchor hue: saffron 62
+ * theme: custom (tuned) · vibe: "river at dawn, marigold, stone steps, ink"
+ * paper oklch(97% 0.012 85) · accent oklch(74% 0.16 62) saffron (fills only) · text accent oklch(47% 0.15 35) sindoor
+ * display: Young Serif (roman) · body: Mukta (Latin + Devanagari) · both self-hosted via @fontsource
+ * axes: light / roman-serif / warm · nav: N9 edge-aligned · footer: Ft5 statement
+ */
+:root {
+  /* colour */
+  --color-paper: oklch(97% 0.012 85);
+  --color-paper-2: oklch(93.5% 0.02 80);
+  --color-paper-3: oklch(89% 0.028 78);
+  --color-ink: oklch(24% 0.025 50);
+  --color-ink-2: oklch(41% 0.03 55);
+  --color-rule: oklch(84% 0.025 75);
+  --color-river: oklch(43% 0.07 225);
+  --color-river-2: oklch(86% 0.04 215);
+  --color-river-3: oklch(93% 0.025 210);
+  --color-saffron: oklch(74% 0.16 62);
+  --color-saffron-2: oklch(68% 0.17 55);
+  --color-sindoor: oklch(47% 0.15 35);
+  --color-focus: oklch(47% 0.15 35);
+  --color-ok: oklch(45% 0.11 150);
+  --color-ok-bg: oklch(95% 0.035 150);
+  --color-err: oklch(48% 0.17 28);
+  --color-err-bg: oklch(95% 0.03 28);
+  --color-todo-bg: oklch(93% 0.08 95);
+  --color-on-saffron: oklch(22% 0.03 50);
+  --color-on-dark: oklch(97% 0.012 85);
+  --color-scrim: oklch(24% 0.025 50 / 0.6);
+  --color-print-bg: oklch(100% 0 0);
+  --color-print-ink: oklch(0% 0 0);
+  --shadow-1: 0 6px 20px oklch(24% 0.025 50 / 0.25);
+  --shadow-2: 0 10px 30px oklch(24% 0.025 50 / 0.18);
+
+  /* type */
+  --font-display: "Young Serif", "Georgia", serif;
+  --font-body: "Mukta", "Noto Sans Devanagari", system-ui, sans-serif;
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-base: 1.0625rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.6rem, 1.2rem + 1.6vw, 2.1rem);
+  --text-3xl: clamp(1.9rem, 1.3rem + 2.4vw, 2.9rem);
+  --text-display: clamp(2.4rem, 1.4rem + 4.2vw, 4.4rem);
+  --leading-tight: 1.08;
+  --leading-body: 1.6;
+  --measure: 66ch;
+
+  /* space (4pt) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-section: clamp(4.5rem, 3rem + 6vw, 8.5rem);
+  --gutter: clamp(1rem, 0.5rem + 2.5vw, 2.5rem);
+  --max: 76rem;
+
+  /* shape */
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-pill: 999px;
+  --rule-hair: 1px solid var(--color-rule);
+  --rule-ink: 2px solid var(--color-ink);
+
+  /* motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in: cubic-bezier(0.55, 0, 1, 0.45);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+}

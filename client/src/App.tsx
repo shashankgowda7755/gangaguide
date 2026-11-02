@@ -1,47 +1,50 @@
-import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { useEffect } from "react";
+import { Switch, Route, useLocation } from "wouter";
+import { Layout } from "@/components/Layout";
+import { HumanCheckHost } from "@/lib/humanCheck";
+import { metaFor } from "@/seo";
 import Home from "@/pages/Home";
-import PackagesLanding from "@/pages/PackagesLanding";
-import PackageCategory from "@/pages/PackageCategory";
-import Destinations from "@/pages/Destinations";
-import Blog from "@/pages/Blog";
-import About from "@/pages/About";
-import Booking from "@/pages/Booking";
-import PackageDetail from "@/pages/PackageDetail";
-import DestinationDetail from "@/pages/DestinationDetail";
-import BlogDetail from "@/pages/BlogDetail";
-import NotFound from "@/pages/not-found";
+import { TripsPage, TripPage } from "@/pages/Trips";
+import { PlacesPage, PlacePage } from "@/pages/Places";
+import { JournalPage, PostPage } from "@/pages/Journal";
+import { AboutPage, ContactPage, FaqPage } from "@/pages/Info";
+import { PrivacyPage, TermsPage, CancellationPage, CookiesPage } from "@/pages/Legal";
+import NotFound from "@/pages/NotFound";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/packages" component={PackagesLanding} />
-      <Route path="/packages/:category" component={PackageCategory} />
-      <Route path="/destinations" component={Destinations} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/about" component={About} />
-      <Route path="/booking" component={Booking} />
-      <Route path="/package/:id" component={PackageDetail} />
-      <Route path="/destination/:id" component={DestinationDetail} />
-      <Route path="/blog/:id" component={BlogDetail} />
-      <Route component={NotFound} />
-    </Switch>
-  );
+/** Keeps <title> and the description in sync on client-side navigation (the prerender writes the first one). */
+function HeadSync() {
+  const [path] = useLocation();
+  useEffect(() => {
+    const m = metaFor(path);
+    document.title = m.title;
+    document.querySelector('meta[name="description"]')?.setAttribute("content", m.description);
+    if (!window.location.hash) window.scrollTo(0, 0);
+  }, [path]);
+  return null;
 }
 
-function App() {
+export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Router />
-      </TooltipProvider>
-    </QueryClientProvider>
+    <Layout>
+      <HeadSync />
+      <HumanCheckHost />
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/packages" component={TripsPage} />
+        <Route path="/packages/:slug">{(p) => <TripPage slug={p.slug} />}</Route>
+        <Route path="/destinations" component={PlacesPage} />
+        <Route path="/destinations/:slug">{(p) => <PlacePage slug={p.slug} />}</Route>
+        <Route path="/journal" component={JournalPage} />
+        <Route path="/journal/:slug">{(p) => <PostPage slug={p.slug} />}</Route>
+        <Route path="/about" component={AboutPage} />
+        <Route path="/contact" component={ContactPage} />
+        <Route path="/faq" component={FaqPage} />
+        <Route path="/privacy" component={PrivacyPage} />
+        <Route path="/terms" component={TermsPage} />
+        <Route path="/cancellation-policy" component={CancellationPage} />
+        <Route path="/cookies" component={CookiesPage} />
+        <Route component={NotFound} />
+      </Switch>
+    </Layout>
   );
 }
-
-export default App;
