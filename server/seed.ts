@@ -1,4 +1,4 @@
-import { storage } from "./storage";
+import { storage } from "./storage.js";
 const log = (msg: string) => console.log(`[seed] ${msg}`);
 
 export async function seedDatabase() {

@@ -1,6 +1,6 @@
 import express from 'express';
-import { registerRoutes } from '../server/routes';
-import { seedDatabase } from '../server/seed';
+import { registerRoutes } from '../server/routes.js';
+import { seedDatabase } from '../server/seed.js';
 
 const app = express();
 
