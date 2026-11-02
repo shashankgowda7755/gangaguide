@@ -1,5 +1,11 @@
 # Memory — GangaGuides (newest first)
 
+## 2026-11-02 — finish-up pass (worker-gangaguide-rebuild-3)
+- Re-score 77/100 (85/110) with evidence in `~/Claude/gangaguide-audit/v2-score.html`. Lighthouse mobile (local preview) 99–100 on all 4 categories for home, a trip, a destination, a post, /booking.
+- Bug: `npm start` ignored `vercel.json` redirects, so v1 URLs (/booking, /blog/:id …) 404'd locally. `server/index.ts` now reads them and answers 308.
+- Bug: `scripts/qa.mjs` counted the 404 route's own expected document error as a console error (QA FAIL 1/27). Now ignored only for that URL.
+- Gotcha: `scripts/schema-check.mjs` downloads the vocabulary from schema.org; DNS is blocked in the Claude sandbox, run it outside.
+
 ## 2026-11-02 — rebuild v2 (worker-gangaguide-rebuild)
 - Audit scored v1 23/100 (verdict: rebuild). Rebuilt from scratch on `rebuild/v2`; `main` untouched.
 - **Root cause of live outage:** Vercel project settings Output = `dist` served `dist/index.js` (Express bundle) at `/`. Fix: `vercel.json` pins `buildCommand` + `outputDirectory: dist/public`; server bundle no longer built into a served dir.

@@ -39,6 +39,12 @@ app.all("/api/*", (_req, res) => void res.status(404).json({ ok: false, error: "
 
 if (prod) {
   const pub = path.join(root, "dist/public");
+  // Same permanent redirects as vercel.json (old v1 URLs), so the preview answers like production.
+  const { redirects } = JSON.parse(await readFile(path.join(root, "vercel.json"), "utf8")) as { redirects: { source: string; destination: string }[] };
+  for (const r of redirects) {
+    const re = new RegExp(`^${r.source.replace(/:[a-z]+/g, "[^/]+")}/?$`);
+    app.get(re, (_req, res) => res.redirect(308, r.destination));
+  }
   // Vercel's CDN compresses text responses; do the same here so local Lighthouse numbers match.
   const packed = new Map<string, Buffer>();
   const types: Record<string, string> = { ".html": "text/html; charset=utf-8", ".css": "text/css; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".svg": "image/svg+xml", ".xml": "application/xml", ".txt": "text/plain; charset=utf-8" };

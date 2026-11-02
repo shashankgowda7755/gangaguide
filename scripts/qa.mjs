@@ -27,7 +27,9 @@ for (const p of paths) {
     const ctx = await browser.newContext({ viewport: { width, height }, deviceScaleFactor: 1, bypassCSP: true });
     await ctx.addInitScript(() => localStorage.setItem("gg-cookie-ok", "1"));
     const page = await ctx.newPage();
-    page.on("console", (m) => m.type() === "error" && row.console.push(`${label}: ${m.text()}`));
+    // The 404 route's own document response is logged by Chrome as a resource error; that one is expected.
+    const expected404 = (m) => p === "/this-page-does-not-exist" && m.location().url === BASE + p;
+    page.on("console", (m) => m.type() === "error" && !expected404(m) && row.console.push(`${label}: ${m.text()}`));
     page.on("pageerror", (e) => row.console.push(`${label}: ${e.message}`));
     const res = await page.goto(BASE + p, { waitUntil: "networkidle" });
     row.status = res.status();
