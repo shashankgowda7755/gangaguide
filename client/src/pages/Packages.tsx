@@ -73,7 +73,7 @@ export default function Packages() {
     <div className="min-h-screen pb-20">
       <Navigation onBookNowClick={() => setLocation("/booking")} />
       
-      <section className="py-16 md:py-24 px-4 bg-background">
+      <section className="pt-32 pb-16 md:pt-36 md:pb-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
             <div className="text-center mb-12">

@@ -81,7 +81,7 @@ export default function BlogDetail() {
     <div className="min-h-screen pb-20">
       <Navigation onBookNowClick={() => setLocation("/booking")} />
 
-      <div className="max-w-4xl mx-auto px-4 py-8 md:py-12">
+      <div className="max-w-4xl mx-auto px-4 pt-28 pb-8 md:pt-32 md:pb-12">
         <Button
           variant="ghost"
           onClick={() => setLocation("/#blog")}

@@ -6,8 +6,8 @@ import WhatsAppFloat from "@/components/WhatsAppFloat";
 import FadeInSection from "@/components/FadeInSection";
 import TeamMember from "@/components/TeamMember";
 
-import guide1 from "@assets/generated_images/Local_tour_guide_portrait_a60f1ce8.png";
-import guide2 from "@assets/generated_images/Female_guide_portrait_professional_c50981da.png";
+import guide1 from "@assets/generated_images/Local_tour_guide_portrait_a60f1ce8.webp";
+import guide2 from "@assets/generated_images/Female_guide_portrait_professional_c50981da.webp";
 
 export default function About() {
   const [, setLocation] = useLocation();
@@ -39,7 +39,7 @@ export default function About() {
     <div className="min-h-screen pb-20">
       <Navigation onBookNowClick={() => setLocation("/booking")} />
       
-      <section className="py-16 md:py-24 px-4 bg-background">
+      <section className="pt-32 pb-16 md:pt-36 md:pb-24 px-4 bg-background">
         <div className="max-w-7xl mx-auto">
           <FadeInSection>
             <div className="text-center mb-12">

@@ -11,18 +11,18 @@ export async function seedDatabase() {
     }
 
     // Image paths - these will be served from the attached_assets folder
-    const varanasi = "/attached_assets/generated_images/Boat_perspective_Ganges_view_e308dae7.png";
-    const ayodhya = "/attached_assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.png";
-    const sarnath = "/attached_assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.png";
-    const prayagraj = "/attached_assets/generated_images/Prayagraj_Triveni_Sangam_confluence_c12597e6.png";
+    const varanasi = "/attached_assets/generated_images/Boat_perspective_Ganges_view_e308dae7.webp";
+    const ayodhya = "/attached_assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.webp";
+    const sarnath = "/attached_assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.webp";
+    const prayagraj = "/attached_assets/generated_images/Prayagraj_Triveni_Sangam_confluence_c12597e6.webp";
     
-    const blog1 = "/attached_assets/generated_images/Morning_meditation_Ganges_sunrise_001c3280.png";
-    const blog2 = "/attached_assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f0199e.png";
-    const blog3 = "/attached_assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.png";
+    const blog1 = "/attached_assets/generated_images/Morning_meditation_Ganges_sunrise_001c3280.webp";
+    const blog2 = "/attached_assets/generated_images/Hidden_temple_courtyard_Varanasi_c1f0199e.webp";
+    const blog3 = "/attached_assets/generated_images/Ayodhya_spiritual_trail_dusk_b641daa9.webp";
     
-    const package1 = "/attached_assets/generated_images/Kashi_walking_tour_group_d0392eea.png";
-    const package2 = "/attached_assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.png";
-    const package3 = "/attached_assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.png";
+    const package1 = "/attached_assets/generated_images/Kashi_walking_tour_group_d0392eea.webp";
+    const package2 = "/attached_assets/generated_images/Sarnath_Buddhist_stupa_sunset_888b3275.webp";
+    const package3 = "/attached_assets/generated_images/Ayodhya_Ram_Mandir_temple_baae3de1.webp";
 
     // Seed Destinations
     const varanasiDest = await storage.createDestination({
