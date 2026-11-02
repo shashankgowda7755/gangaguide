@@ -10,76 +10,69 @@ import { tripBySlug } from "@/content/trips";
  */
 
 const W = 420;
-const TOP = 60;
-const BOTTOM = 710;
-const bankX = (y: number) => 255 - 75 * Math.sin((Math.PI * (y - TOP)) / (BOTTOM - TOP));
 const RIVER = 115;
 
-const ys = [690, 640, 580, 525, 430, 372, 330, 245, 95];
+// Two drawings of the same riverfront: the tall one for wide screens, a condensed one for phones (CSS picks).
+type Shape = { top: number; bottom: number; h: number; ys: number[]; flowY: number; sandY: number; northY: number };
+const TALL: Shape = { top: 60, bottom: 710, h: 770, ys: [690, 640, 580, 525, 430, 372, 330, 245, 95], flowY: 470, sandY: 300, northY: 40 };
+const COMPACT: Shape = { top: 40, bottom: 430, h: 460, ys: [420, 382, 344, 306, 258, 220, 182, 136, 62], flowY: 290, sandY: 190, northY: 26 };
 
-function bankPath(offset = 0) {
-  const pts: string[] = [];
-  for (let y = TOP - 40; y <= BOTTOM + 40; y += 10) pts.push(`${(bankX(y) + offset).toFixed(1)},${y}`);
-  return "M" + pts.join(" L");
+function geometry({ top, bottom }: Shape) {
+  const bankX = (y: number) => 255 - 75 * Math.sin((Math.PI * (y - top)) / (bottom - top));
+  const ys: number[] = [];
+  for (let y = top - 40; y <= bottom + 40; y += 10) ys.push(y);
+  const line = (offset: number) => ys.map((y) => `${(bankX(y) + offset).toFixed(1)},${y}`);
+  return {
+    bankX,
+    bank: (offset = 0) => "M" + line(offset).join(" L"),
+    water: "M" + line(0).join(" L") + " L" + line(RIVER).reverse().join(" L") + " Z",
+    east: `M${line(RIVER).join(" L")} L${W},${bottom + 40} L${W},${top - 40} Z`,
+  };
 }
 
-const water = (() => {
-  const left: string[] = [];
-  const right: string[] = [];
-  for (let y = TOP - 40; y <= BOTTOM + 40; y += 10) {
-    left.push(`${bankX(y).toFixed(1)},${y}`);
-    right.unshift(`${(bankX(y) + RIVER).toFixed(1)},${y}`);
-  }
-  return "M" + left.join(" L") + " L" + right.join(" L") + " Z";
-})();
-
-const east = (() => {
-  const pts: string[] = [];
-  for (let y = TOP - 40; y <= BOTTOM + 40; y += 10) pts.push(`${(bankX(y) + RIVER).toFixed(1)},${y}`);
-  return `M${pts.join(" L")} L${W},${BOTTOM + 40} L${W},${TOP - 40} Z`;
-})();
+function River({ shape, active, onPick, className }: { shape: Shape; active: number; onPick: (i: number) => void; className: string }) {
+  const g = geometry(shape);
+  return (
+    <svg className={`map__svg ${className}`} viewBox={`0 0 ${W} ${shape.h}`} aria-hidden="true" focusable="false">
+      <path className="map__east" d={g.east} />
+      <path className="map__water" d={g.water} />
+      <path className="map__bank" d={g.bank()} />
+      <path className="map__bank" d={g.bank(RIVER)} />
+      <text className="map__flow" transform={`translate(${g.bankX(shape.flowY - 70) + RIVER / 2 + 5} ${shape.flowY}) rotate(-90)`} textAnchor="middle">
+        GANGA FLOWS NORTH ↑
+      </text>
+      <text className="map__label-east" x={W - 12} y={shape.sandY} textAnchor="end">
+        Sand flats
+      </text>
+      <text className="map__label-east" x={W - 12} y={shape.sandY + 18} textAnchor="end">
+        (east bank)
+      </text>
+      <text className="map__label-east" x={W - 12} y={shape.northY} textAnchor="end">
+        N ↑
+      </text>
+      {ghats.map((gh, i) => {
+        const y = shape.ys[i];
+        const x = g.bankX(y);
+        return (
+          <g key={gh.name} className="map__node" data-active={i === active} style={{ "--i": i } as React.CSSProperties} onClick={() => onPick(i)}>
+            <line className="map__tick" x1={x} y1={y} x2={x + 14} y2={y} />
+            <circle cx={x} cy={y} r={i === active ? 9 : 7} />
+            <text x={x - 16} y={y + 6} textAnchor="end">
+              {gh.name}
+            </text>
+          </g>
+        );
+      })}
+    </svg>
+  );
+}
 
 export function GhatMap() {
   const [active, setActive] = useState(4);
   return (
     <div className="map">
-      <svg className="map__svg" viewBox={`0 0 ${W} 770`} aria-hidden="true" focusable="false">
-        <path className="map__east" d={east} />
-        <path className="map__water" d={water} />
-        <path className="map__bank" d={bankPath()} />
-        <path className="map__bank" d={bankPath(RIVER)} />
-        <text className="map__flow" transform={`translate(${bankX(400) + RIVER / 2 + 5} 470) rotate(-90)`} textAnchor="middle">
-          GANGA FLOWS NORTH ↑
-        </text>
-        <text className="map__label-east" x={W - 12} y={300} textAnchor="end">
-          Sand flats
-        </text>
-        <text className="map__label-east" x={W - 12} y={318} textAnchor="end">
-          (east bank)
-        </text>
-        <text className="map__label-east" x={W - 12} y={40} textAnchor="end">
-          N ↑
-        </text>
-        {ghats.map((g, i) => {
-          const y = ys[i];
-          const x = bankX(y);
-          return (
-            <g
-              key={g.name}
-              className="map__node"
-              data-active={i === active}
-              style={{ "--i": i } as React.CSSProperties}
-              onClick={() => setActive(i)}
-            >
-              <line className="map__tick" x1={x} y1={y} x2={x + 14} y2={y} />
-              <circle cx={x} cy={y} r={i === active ? 9 : 7} />
-              <text x={x - 16} y={y + 6} textAnchor="end">
-                {g.name}
-              </text>
-            </g>
-          );
-        })}
-      </svg>
+      <River shape={TALL} active={active} onPick={setActive} className="map__svg--tall" />
+      <River shape={COMPACT} active={active} onPick={setActive} className="map__svg--compact" />
       <ol className="map__legend" reversed aria-label="Ghats from north to south">
         {[...ghats.keys()].reverse().map((i) => {
           const g = ghats[i];
@@ -88,7 +81,7 @@ export function GhatMap() {
             <li key={g.name} data-active={i === active}>
               <b>
                 <button type="button" aria-pressed={i === active} onClick={() => setActive(i)}>
-                  {g.name} Ghat
+                  {g.name.endsWith("Ghat") ? g.name : `${g.name} Ghat`}
                 </button>
               </b>
               <span>

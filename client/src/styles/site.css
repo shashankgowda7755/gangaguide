@@ -96,6 +96,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 .map { position: relative; }
 .map__svg { width: 100%; height: auto; }
+.map__svg--compact { display: none; }
 .map__water { fill: var(--color-river-2); }
 .map__bank { fill: none; stroke: var(--color-ink); stroke-width: 1.5; }
 .map__east { fill: var(--color-paper-2); }
@@ -114,8 +115,13 @@ a:hover { text-decoration-thickness: 2px; }
 .map__legend b { font-family: var(--font-display); font-weight: 400; }
 .map__legend button { all: unset; cursor: pointer; font-family: var(--font-display); }
 .map__legend button:focus-visible { outline: 3px solid var(--color-focus); outline-offset: 2px; }
+/* phones: condensed drawing, tighter legend */
 @media (max-width: 520px) {
-  .map__legend li { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .map__svg--tall { display: none; }
+  .map__svg--compact { display: block; }
+  .map__legend { margin-top: var(--space-4); }
+  .map__legend li { grid-template-columns: minmax(0, 1fr); gap: 0; padding-block: var(--space-2); font-size: var(--text-sm); line-height: 1.45; }
+  .map__legend b { font-size: var(--text-base); line-height: 1.3; }
 }
 
 /* section heads */
@@ -267,8 +273,10 @@ a:hover { text-decoration-thickness: 2px; }
 @media (max-width: 860px) { .site-footer__grid { grid-template-columns: minmax(0, 1fr); } }
 
 /* floating WhatsApp, back to top, cookie notice */
-.wa-float { position: fixed; right: var(--space-4); bottom: var(--space-4); z-index: 30; box-shadow: var(--shadow-1); }
-.to-top { position: fixed; right: var(--space-4); bottom: 5.25rem; z-index: 30; width: 44px; height: 44px; border-radius: var(--radius-pill); border: 2px solid var(--color-ink); background: var(--color-paper); color: var(--color-ink); font: 600 1.1rem/1 var(--font-body); cursor: pointer; }
+.wa-float { position: fixed; right: max(var(--space-4), env(safe-area-inset-right)); bottom: max(var(--space-4), env(safe-area-inset-bottom)); z-index: 30; box-shadow: var(--shadow-1); transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out), visibility var(--dur-fast); }
+/* Hidden while the map, a form, another WhatsApp button or the footer is on screen, and while scrolling down on phones */
+.wa-float[data-hidden="true"], .to-top[data-hidden="true"] { opacity: 0; visibility: hidden; transform: translateY(150%); }
+.to-top { position: fixed; right: max(var(--space-4), env(safe-area-inset-right)); bottom: calc(max(var(--space-4), env(safe-area-inset-bottom)) + 4.25rem); transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out), visibility var(--dur-fast); z-index: 30; width: 44px; height: 44px; border-radius: var(--radius-pill); border: 2px solid var(--color-ink); background: var(--color-paper); color: var(--color-ink); font: 600 1.1rem/1 var(--font-body); cursor: pointer; }
 .to-top:hover { background: var(--color-paper-2); }
 .cookie { position: fixed; left: var(--space-4); bottom: var(--space-4); z-index: 50; max-width: min(28rem, calc(100vw - 2 * var(--space-4))); background: var(--color-paper); border: var(--rule-ink); border-radius: var(--radius-md); padding: var(--space-4) var(--space-5); font-size: var(--text-sm); box-shadow: var(--shadow-2); }
 .cookie { display: flex; gap: var(--space-4); align-items: center; }

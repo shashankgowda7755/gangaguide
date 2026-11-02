@@ -147,11 +147,27 @@ function Footer() {
   );
 }
 
+// The floating button steps aside when it would cover something: the map, a form, another WhatsApp button,
+// the footer, or (on phones) the text being read while scrolling down.
+const COVERS = ".map, form, .status, .site-footer, a.btn[href*='wa.me']:not(.wa-float)";
+
 function Floating() {
+  const [path] = useLocation();
   const [showTop, setShowTop] = useState(false);
   const [cookie, setCookie] = useState(false);
+  const [overlap, setOverlap] = useState(false);
+  const [down, setDown] = useState(false);
   useEffect(() => {
-    const onScroll = () => setShowTop(window.scrollY > 900);
+    let lastY = window.scrollY;
+    const phone = window.matchMedia("(max-width: 860px)");
+    const onScroll = () => {
+      const y = window.scrollY;
+      setShowTop(y > 900);
+      if (Math.abs(y - lastY) > 12) {
+        setDown(phone.matches && y > lastY && y > 200);
+        lastY = y;
+      }
+    };
     window.addEventListener("scroll", onScroll, { passive: true });
     try {
       setCookie(localStorage.getItem("gg-cookie-ok") !== "1");
@@ -160,13 +176,33 @@ function Floating() {
     }
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    const seen = new Set<Element>();
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) e.isIntersecting ? seen.add(e.target) : seen.delete(e.target);
+        setOverlap(seen.size > 0);
+      },
+      { rootMargin: "0px 0px -10% 0px" },
+    );
+    const watch = () => document.querySelectorAll(COVERS).forEach((el) => io.observe(el));
+    watch();
+    // forms swap to a success or error panel after submit: watch new nodes too
+    const mo = new MutationObserver(watch);
+    mo.observe(document.getElementById("main") ?? document.body, { childList: true, subtree: true });
+    return () => {
+      io.disconnect();
+      mo.disconnect();
+    };
+  }, [path]);
+  const hidden = overlap || down;
   return (
     <aside aria-label="Quick contact">
-      <a className="btn btn--ink wa-float" href={whatsappLink(`Namaste ${site.brandName}, I'd like to plan a trip.`)} target="_blank" rel="noopener">
+      <a className="btn btn--ink wa-float" data-hidden={hidden} href={whatsappLink(`Namaste ${site.brandName}, I'd like to plan a trip.`)} target="_blank" rel="noopener">
         WhatsApp<span className="sr-only"> us (opens in a new tab)</span>
       </a>
       {showTop && (
-        <button type="button" className="to-top" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <button type="button" className="to-top" data-hidden={down} aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
           ↑
         </button>
       )}
