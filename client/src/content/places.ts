@@ -43,6 +43,9 @@ export const places: Place[] = [
     body: [
       "Sarnath is a short drive from the ghats and a different world from them: lawns, ruins and quiet. It is where the Buddha gave his first sermon, setting in motion what Buddhists call the Wheel of Dharma.",
       "The Dhamek Stupa still stands over the excavated ruins of the old monasteries. The site museum holds the Lion Capital of Ashoka, the emblem on India's currency notes.",
+      "The emperor Ashoka raised a pillar and stupas here in the 3rd century BCE. The pillar's lion capital was dug up in excavations in the early 1900s and became India's national emblem in 1950. Most of the Dhamek Stupa you see today dates from the Gupta period, around the 5th to 6th century CE.",
+      "On the road in from Varanasi, the Chaukhandi Stupa marks the place where the Buddha is said to have met his five former companions; the octagonal brick tower on top was added in 1588, in Akbar's time. Around the deer park are temples built by Buddhist communities from Thailand, Tibet, Japan and Sri Lanka, and a Jain temple for Shreyansanath, the eleventh tirthankara, who is associated with Sarnath.",
+      "Sarnath is about 30 to 45 minutes by road from the ghats, depending on traffic. Half a day is enough for the stupas, the ruins and the museum, so it pairs well with a morning boat ride or an evening aarti in Varanasi. Buddha Purnima, in April or May, is the main festival.",
     ],
     see: [
       { name: "Dhamek Stupa", note: "The great stupa marking the site of the first sermon." },
@@ -61,6 +64,9 @@ export const places: Place[] = [
     body: [
       "Ayodhya is honoured as the birthplace of Lord Ram and is one of the seven sacred cities of Hindu tradition. Its temples and ghats line the Saryu river.",
       "Most visitors come for the Ram Janmabhoomi temple, then visit Hanuman Garhi, Kanak Bhawan and the Saryu ghats in the evening. The nearest large airports are Ayodhya and Lucknow; the city is also well connected by train.",
+      "The new Ram Janmabhoomi temple was consecrated on 22 January 2024 and draws very large crowds, especially at weekends and on festival days. Mobile phones, bags and electronics have generally not been allowed inside; there are lockers near the entry. Rules and timings change, so check on the day.",
+      "By road, Ayodhya is about 200 km from Varanasi, usually four to five hours each way, which is why we plan it as an overnight stay rather than a day trip. Ayodhya Dham railway station and Maharishi Valmiki International Airport both serve the city.",
+      "Beyond the main temple, Ram ki Paidi is a long stretch of steps and channels on the Saryu where the evening aarti is held, and where lakhs of diyas are lit for Deepotsav on the eve of Diwali. Guptar Ghat, a little upstream, is where tradition holds that Ram entered the Saryu at the end of his life.",
     ],
     see: [
       { name: "Ram Janmabhoomi temple", note: "Check the day's darshan timings and rules on items you can carry." },
@@ -80,6 +86,9 @@ export const places: Place[] = [
     body: [
       "Prayagraj, formerly Allahabad, holds the Triveni Sangam, the confluence of the Ganga and the Yamuna, joined in tradition by the unseen Saraswati. It is one of the four sites of the Kumbh Mela.",
       "A boat takes you out to the meeting point, where you can see the two rivers' different colours side by side. The fort and the Akshayavat, the immortal banyan, are close by.",
+      "The city was renamed from Allahabad to Prayagraj in 2018. The Mughal emperor Akbar built the fort at the Sangam in 1583; most of it is still used by the army, but the Patalpuri temple and the Akshayavat inside can be visited when open. Just outside the fort, the Bade Hanuman temple has a large reclining image of Hanuman.",
+      "Every January and February the Magh Mela brings pilgrims to camp on the sandbanks. The Kumbh Mela comes round every twelve years, with an Ardh Kumbh in between; the most recent Maha Kumbh was held from January to February 2025. In those weeks the city is far busier and roads around the Sangam close to traffic.",
+      "Prayagraj is about 120 km from Varanasi, roughly three hours by road, so the Sangam can be done as a long day trip. Go early: the river is calmer, the light is softer and the boats are less crowded.",
     ],
     see: [
       { name: "Triveni Sangam", note: "Boat out to the confluence for a holy dip or a prayer." },

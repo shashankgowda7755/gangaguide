@@ -131,6 +131,22 @@ export const posts: Post[] = [
         ],
       },
       {
+        heading: "Two days, unhurried",
+        paras: [
+          "Day one: leave Varanasi early and reach Ayodhya by early afternoon. Many pilgrims visit Hanuman Garhi first, then Kanak Bhawan. Finish at Ram ki Paidi for the evening aarti on the Saryu.",
+          "Day two: go to the Ram Janmabhoomi temple early, when the queues are usually shorter. Leave your phone and bag in the car or at the lockers. After darshan, stop at Guptar Ghat on the way out, then drive back to Varanasi or on to Lucknow.",
+        ],
+      },
+      {
+        heading: "What to carry",
+        list: [
+          "A government photo ID for each person.",
+          "Some cash in small notes for offerings, prasad and lockers.",
+          "Shoes that are easy to take off and put back on.",
+          "Water, and a light shawl or stole for early mornings in winter.",
+        ],
+      },
+      {
         heading: "Getting there",
         paras: [
           "Ayodhya has its own airport and a railway station, and Lucknow is a few hours away by road. From Varanasi it is about 200 km, most easily done by car.",
